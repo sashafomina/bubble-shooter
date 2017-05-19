@@ -53,7 +53,7 @@ Kevin ::
 
 2017-05-18
 --------------------------------------------------------------
-Sasha ::
+Sasha :: wrote up the first version of the plan and preliminary notes for the more of the speicifcs of the design in a shared google doc
 Daniel ::
 Kevin ::
 
