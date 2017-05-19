@@ -1,0 +1,37 @@
+StringCheese
+Sasha Fomina
+Daniel Ju
+Kevin Li
+pd 4
+---------------------
+Bubble Shooter!
+
+Which jobs are most crucial? Which components constitute core functionality?
+--------------------------------------------------------------------------------
+++When a bubble is launched is must stick to the field of bubbles appropriately to satisfy the hex grid structure, and result in a popping of same color bubbles.
+
+++Winning when the field of bubbles is cleared or losing when the field has at least one bubble in each row 
+
+What components are prerequisites for others?
+------------------------------------------------------------------------------------
+++The popping mechanisms requires state vars and neighbor arraylists to be in compliance, and requires for the ball to go into its appropriate slot in the 2D array
+
+++The launching of the ball requires the move method in the ball to work appropriately based on the chosen angle which requires the mouse hovering to work
+
+Chronology and Delegation
+----------------------------------------------------------------------------------------
+1. Get launching to work ? the dotted line needs to be drawn correctly and adjust based on mouse hover, and when the ball is launched at a particular angle it follows that proper trajectory (including bouncing off the walls)
+	---> One person should be assigned this task
+2. Create the 2D array with the proper states of each ball and display this 2D array
+	---> One person should be assigned this task
+3. Ensure that a launched ball would adjust slightly and stick in the proper slot when displayed and in the proper slot in the 2D array; get losing mechanism working
+	---> One person should be assigned this task
+4. Get popping mechanism to work 
+	---> Can be divided, or collaboratively implemented ? have to agree on an algo
+
+Timeline
+--------------------------------------------------------------------------------------------
+1. Should be finished by monday
+2. Should be finished by monday
+3. Should be finished by wednesday
+4. Should be finished by friday ? this version now has complete core functionality, winning must work and losing must work
