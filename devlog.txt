@@ -57,4 +57,10 @@ Sasha :: wrote up the first version of the plan and preliminary notes for the mo
 Daniel ::
 Kevin :: Edited and suggested changes to Sasha's initial plan draft, changes to be uploaded later.
 
+2017-05-21
+--------------------------------------------------------------
+Sasha :: 
+Daniel ::
+Kevin :: Created basic processing sketch for ball and ballshooter
+
 ==============================================================
