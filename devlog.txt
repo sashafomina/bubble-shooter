@@ -65,7 +65,7 @@ Kevin :: Created basic processing sketch for ball and ballshooter
 
 2017-05-22
 --------------------------------------------------------------
-Sasha :: 
+Sasha :: Came up with more ways to implement semester 2 data structures and algorithms.
 Daniel :: Came up with more ways to implement semester 2 data structures and algorithms.
 Kevin :: Came up with more ways to implement semester 2 data structures and algorithms.
 
