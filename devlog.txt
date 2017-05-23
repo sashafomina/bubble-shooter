@@ -63,4 +63,10 @@ Sasha ::
 Daniel ::
 Kevin :: Created basic processing sketch for ball and ballshooter
 
+2017-05-22
+--------------------------------------------------------------
+Sasha :: 
+Daniel :: Updated the proposal to reflect comments from Mr. Brown. 
+Kevin :: 
+
 ==============================================================
