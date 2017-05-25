@@ -75,4 +75,10 @@ Sasha ::
 Daniel :: Updated the proposal to reflect comments from Mr. Brown. Uploaded proposal to Git repo. Also created the flow chart.
 Kevin :: 
 
+2017-05-24
+--------------------------------------------------------------
+Sasha :: 
+Daniel :: Worked on integrating loops into our flowchart
+Kevin :: Worked on integrating loops into our flowchart
+
 ==============================================================
