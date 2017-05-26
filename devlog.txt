@@ -81,4 +81,15 @@ Sasha ::
 Daniel :: Worked on integrating loops into our flowchart
 Kevin :: Worked on integrating loops into our flowchart
 
+2017-05-25
+--------------------------------------------------------------
+Sasha :: 
+Daniel :: 
+Kevin :: Began working on the Bubble class
+
+2017-05-26
+--------------------------------------------------------------
+Sasha :: 
+Daniel :: 
+Kevin :: Finished the Bubble skeleton
 ==============================================================
