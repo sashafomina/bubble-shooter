@@ -23,7 +23,7 @@ public class Bubble {
     
     public Bubble(){
       _color = (int) (Math.random() * 6);
-      _xcor = 200;
+      _xcor = 225;
       _ycor = 600;
     }
 }

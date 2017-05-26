@@ -1,8 +1,6 @@
-public class Bubble_Shooter{
   void setup(){
-     size(400, 600);
+     size(450, 600);
   }
   
   void draw(){
   }
-}
