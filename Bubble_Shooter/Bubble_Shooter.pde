@@ -15,7 +15,6 @@
   
   void draw(){
     background(255,255,255);
-    //createPointer(test);
     launch(test);
     drawAll();
 
@@ -79,7 +78,7 @@
           angle = 0;
         }
       }
-      println(angle);
+      //println(angle);
       float newX = center.x + cos(angle) * 80;
       float newY = center.y + sin(angle) * 80;
       stroke(0);
@@ -90,7 +89,8 @@
   }
  
   void drawAll(){
-    test.show();
     createPointer(test);
+    test.show();
+    
   }
   
