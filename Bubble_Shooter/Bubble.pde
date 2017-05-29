@@ -32,7 +32,7 @@ public class Bubble {
     }
     
     public Bubble(){
-      this(width/2, height - 45, 0 , 0, (int) random(0 , 8), 1);
+      this(width/2, height - 45, 0 , 0, (int) random(0,5), 1);
     }
 
     //------ACCESSORS------
@@ -158,9 +158,9 @@ public class Bubble {
     }//O( )
     
     public void show(){
-      //if (_color == BLUE){
+      if (_color == BLUE){
         fill(10,27,216);
-      /*
+      
       }
       else if (_color == RED){
         fill (216, 10,10);
@@ -174,7 +174,6 @@ public class Bubble {
       else if (_color == PINK){
         fill(255, 0 ,250);
       }
-      */
       ellipse(_xcor, _ycor, 2*_radius, 2*_radius);
     }
     

@@ -49,8 +49,8 @@
       _inMotion = true;  
       createAngleVector();
       adjustByAngle(test); 
-      System.out.println(mouse.x);
-      System.out.println(width/2);
+      //System.out.println(mouse.x);
+      //System.out.println(width/2);
     }
   }
   
