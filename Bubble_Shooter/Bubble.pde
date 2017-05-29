@@ -18,7 +18,6 @@ public class Bubble {
     public static final int YELLOW = 2;
     public static final int GREEN = 3;
     public static final int PINK = 4;
-    private static final int SPEED = 7;
 
     //------CONSTRUCTORS------
     public Bubble(float x , float y ,float dx, float dy, int ncolor, int state){
@@ -33,7 +32,7 @@ public class Bubble {
     }
     
     public Bubble(){
-      this(width/2, height - 45, 0 , SPEED , (int) random(0 , 8), 1);
+      this(width/2, height - 45, 0 , 0, (int) random(0 , 8), 1);
     }
 
     //------ACCESSORS------
@@ -116,8 +115,9 @@ public class Bubble {
     //determines how a bubble moves given certain states
     public void move(){
       _xcor += _dx;
-      _ycor -= _dy;
+      _ycor += _dy;
       bounce();
+      
     }//O( )
 
     //determines how a bubble behaves when it reaches a wall
