@@ -20,109 +20,162 @@ public class Bubble {
     public static final int PINK = 4;
     private static final int SPEED = 7;
 
-    //------CONSTRUCTOR------
+    //------CONSTRUCTORS------
+    public Bubble(float x , float y ,float dx, float dy, int ncolor, int state){
+      _radius = 10;
+      _neighbors = new ArrayList(6);
+      _xcor = x; 
+      _ycor = y;
+      _dx = dx;
+      _dy = dy;
+      _color = ncolor;
+      _state = state;
+    }
+    
     public Bubble(){
-
+      this(width/2, height - 45, 0 , SPEED , (int) random(0 , 8), 1);
     }
 
     //------ACCESSORS------
 
     //returns the Color of the bubble
     public int getColor(){
-	return _color;
+	    return _color;
     }//O( )
 
     //returns the state of the bubble
     public int getState(){
-	return _state;
+	    return _state;
     }//O( )
 
     //returns the x velocity of the bubble
     public float getDx(){
-	return _dx;
+	    return _dx;
     }//O( )
 
     //returns the y velocity of the bubble
     public float getDy(){
-	return _dy;
+	    return _dy;
     }//O( )
 
     //returns the x cor of the bubble
     public float getXcor(){
-	return _xcor;
+	    return _xcor;
     }//O( )
 
     //returns the y cor of the bubble
     public float getYcor(){
-	return _ycor;
+	    return _ycor;
     }//O( )
 
     //returns the neighbors of the bubble
     public ArrayList<Bubble> getNeighbors(){
-	return _neighbors;
+	     return _neighbors;
     }//O( )
    
     //------MUTATORS------
 
     //sets the Color of the bubble
     public void setColor(int newColor){
-
+      _color = newColor;
     }//O( )
 
     //sets the State of the bubble
     public void setState(int newState){
+      _state = newState;
 
     }//O( )
 
     //sets the radius of the bubble
     public void setRadius(float newRadius){
-
+      _radius = newRadius;
     }//O( )
 
     //sets the x velocity of the bubble
     public void setDx(float newVelocity){
-
+      _dx = newVelocity;
     }//O( )
 
     //sets the y velocity of the bubble
     public void setDy(float newVelocity){
-
+      _dy = newVelocity;
     }//O( )
 
     //sets the x cor of the bubble
     public void setXcor(float newCor){
-
+      _xcor = newCor;
     }//O( )
 
     //sets the y cor of the bubble
     public void setYcor(float newCor){
-
+      _ycor = newCor;
     }//O( )
 
     //------OTHER METHODS------
 
     //determines how a bubble moves given certain states
     public void move(){
-
+      _xcor += _dx;
+      _ycor -= _dy;
+      bounce();
     }//O( )
 
     //determines how a bubble behaves when it reaches a wall
     public void bounce(){
-	
+	      if( _xcor <= 0 || _xcor >= width){
+           _dx *= -1;
+         }
+         if (_ycor <= 0 || _ycor >= height){
+           _dy *= -1;
+         }
     }//O( )
 
     //returns the number of bubbles directly touching the bubble in question
     public int numNeighbors(){
-
+        int count = 0;
+        for (Bubble b : _neighbors){
+          if (b.getState() == 1){
+            count ++;
+          }
+        }
+        return count;
     }//O( )
 
     //returns an ArrayList containing all of a bubble's neighbors that share its color.
     public ArrayList<Bubble> getSameNeighbors(){
-
+        ArrayList sameNeighbors = new ArrayList();
+        for (Bubble b : _neighbors){
+          if (b.getColor() == _color){
+            sameNeighbors.add(b);
+          }
+        }
+        return sameNeighbors;
     }//O( )
 
-    //returns whether a bubble has bubbles on top of it
-    public  boolean NeighborsonTop(){
-
+    //returns whether a bubble has bubbles on top of it 
+    public  boolean NeighborsonTop(){ //why is this necessary?
+      return false;
     }//O( )
+    
+    public void show(){
+      //if (_color == BLUE){
+        fill(10,27,216);
+      /*
+      }
+      else if (_color == RED){
+        fill (216, 10,10);
+      }
+      else if (_color == YELLOW){
+        fill(229,255,2);
+      }
+      else if (_color == GREEN){
+        fill(25, 244, 9);
+      }
+      else if (_color == PINK){
+        fill(255, 0 ,250);
+      }
+      */
+      ellipse(_xcor, _ycor, 2*_radius, 2*_radius);
+    }
+    
 }
