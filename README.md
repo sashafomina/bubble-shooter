@@ -4,8 +4,8 @@
 
 <h2> Launch Instructions </h2>
 <ol>
-<li> Open file in Processing </li>
-<li> Run </li>
+<li> Open Bubble_Shooter.pde, which is our driver file, in Processing </li>
+<li> Run Bubble_Shooter.pde and you can play the game! </li>
 </ol>
 
 <h2> Description </h2>
