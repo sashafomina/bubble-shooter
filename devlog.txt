@@ -92,4 +92,10 @@ Kevin :: Began working on the Bubble class
 Sasha :: 
 Daniel :: 
 Kevin :: Finished the Bubble skeleton
+
+2017-05-30
+--------------------------------------------------------------
+Sasha :: 
+Daniel :: 
+Kevin :: Added descriptions for how the user plays the game and how the game works into the READme
 ==============================================================
