@@ -1,0 +1,44 @@
+StringCheese
+Sasha Fomina, Daniel Ju, Kevin Li
+Period 4
+Project: Bubble Shooter
+
+Which jobs are most crucial? Which components constitute core functionality?
+Basic environment of balls in hex arrangement being consistently displayed
+When a bubble is launched is must stick to the field of bubbles appropriately to satisfy the hex grid structure, and result in a popping of same color bubbles.
+Winning when the field of bubbles is cleared or losing when the field has at least one bubble in each row 
+
+What components are prerequisites for others?
+The popping mechanisms requires state vars and neighbor arraylists to be in compliance, and requires for the ball to go into its appropriate slot in the 2D array
+The launching of the ball requires the move method in the ball to work appropriately based on the chosen angle which requires the mouse hovering to work
+
+Chronology and Delegation
+Create the 2D array with the proper states of each ball and display this 2D array, with ball at bottom
+One person should be assigned this task
+Get launching to work ? the dotted line needs to be drawn correctly and adjust based on mouse hover, and when the ball is launched at a particular angle it follows that proper trajectory (including bouncing off the walls)
+One person should be assigned this task. (This has already been completed)
+Ensure that a launched ball would adjust slightly and stick in the proper slot when displayed and in the proper slot in the 2D array; get losing mechanism working
+One person should be assigned this task
+Get popping mechanism to work 
+Can be divided, or collaboratively implemented ? have to agree on an algo
+Be able to declare winning and losing, with score keeping and basic game aspects
+One person can be assigned this task
+Expanding elements, better visual appeal (To be better contextualized as project progresses)
+Everyone
+
+Timeline
+Should be finished by Thursday the 1st: The entire game board and the mechanisms for snapping a bubble into place.
+Should be finished by Friday the 2nd: A fully functioning version of the game without implementing 2nd semester techniques.
+Should be finished by Monday the 5th: Creating the queue of upcoming balls that is displayed. Creating the undo button.
+Should be finished by Wednesday the 7th: Finsh the scoring system and rounding out any rough edges that may remain.
+
+Running List of Ideas for Post-core Functionality Development
+Power-up balls
+Visual themes that can be adjusted
+Display something cool after a game is completed? Like possibly an animation of all the balls popped in the game piled up on the screen (could use a stacky structure)
+What are other ways we can implement new things we learned this year?
+
+Ways that we implement data structures learned this year:
+The color of the balls coming up next will be stored in a queue to take advantage of queues’ first in first out property.
+Every time the player successfully shoots down a group of bubbles, the bubbles that just fell down would be stored, in order, in a stack. That allows for us to create a undo button, where the last move made can be reversed.
+Every time the player successfully shoots down a group of bubbles, he/she gains a certain amount of points. Every time a player scores a certain number of points, the point gained as well as the combination of bubbles that the player shot down will be stored in an arraylist (or any other data structure). At the end of the game, whatever data structure we choose to use will be sorted using a sexy second semester sort (maybe heap or merge sort), this way the player can find out which one of his/her moves gained them the most points
