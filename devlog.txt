@@ -109,6 +109,6 @@ Kevin :: Added descriptions for how the user plays the game and how the game wor
 2017-05-30
 --------------------------------------------------------------
 Sasha :: Added BubbleGrid class that populated a 2D array of Bubbles according to the hex grid layout with randomly colored Bubbles, so that every given Bubbble can only have a maximum of 6 neighbor Bubbles. Ensured that the xcors and ycors are such that the Bubble grid is displayed properly (an instance of type Bubble grid was added to the driver class).
-Daniel :: 
+Daniel :: Fixed flowchart. Revised plan to the most updated version.
 Kevin :: 
 ==============================================================
