@@ -18,10 +18,12 @@ public class Bubble {
     public static final int YELLOW = 2;
     public static final int GREEN = 3;
     public static final int PINK = 4;
+    
+    public static final int RADIUS = 20;
 
     //------CONSTRUCTORS------
     public Bubble(float x , float y ,float dx, float dy, int ncolor, int state){
-      _radius = 10;
+      _radius = RADIUS;
       _neighbors = new ArrayList(6);
       _xcor = x; 
       _ycor = y;
@@ -29,6 +31,10 @@ public class Bubble {
       _dy = dy;
       _color = ncolor;
       _state = state;
+    }
+    
+    public Bubble(float x , float y, int state){
+      this (x , y , 0 , 0 , (int) random(0,5) , state);
     }
     
     public Bubble(){
@@ -158,23 +164,24 @@ public class Bubble {
     }//O( )
     
     public void show(){
-      if (_color == BLUE){
-        fill(10,27,216);
-      
+      if (_state == 1){
+        if (_color == BLUE){
+          fill(10,27,216);
+        
+        }
+        else if (_color == RED){
+          fill (216, 10,10);
+        }
+        else if (_color == YELLOW){
+          fill(229,255,2);
+        }
+        else if (_color == GREEN){
+          fill(25, 244, 9);
+        }
+        else if (_color == PINK){
+          fill(255, 0 ,250);
+        }
+        ellipse(_xcor, _ycor, 2*_radius, 2*_radius);
       }
-      else if (_color == RED){
-        fill (216, 10,10);
-      }
-      else if (_color == YELLOW){
-        fill(229,255,2);
-      }
-      else if (_color == GREEN){
-        fill(25, 244, 9);
-      }
-      else if (_color == PINK){
-        fill(255, 0 ,250);
-      }
-      ellipse(_xcor, _ycor, 2*_radius, 2*_radius);
     }
-    
 }

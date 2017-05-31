@@ -1,15 +1,18 @@
   Bubble test;
   boolean _inMotion;
   PVector mouseClick;
-  PVector mouse;
   PVector center;
-  static final float SPEED = 7;
+  BubbleGrid _bubbleField; 
+  
+  static final float SPEED = 20;
+
   
   void setup(){
-     size(450, 600);
+     size(421, 600);
      test = new Bubble();
      _inMotion = false;
      center = new PVector(test.getXcor(), test.getYcor());
+     _bubbleField = new BubbleGrid(); 
      noStroke();
   }
   
@@ -34,7 +37,13 @@
   //adjusts the dx and dy of the Bubble based on the angle of movement decided by the mouse
   void adjustByAngle(Bubble b){
     if (mouseClick.x != 0){
-      float m = mouseClick.y/mouseClick.x;
+      float m;
+      if (mouseClick.y > 0){
+        m = 0;
+      }
+      else{
+        m = mouseClick.y/mouseClick.x;
+      }
       b.setDx(b.getDx() + 4);
       b.setDy(b.getDx() * m);
       float adjuster = sqrt(SPEED*SPEED/(b.getDx()*b.getDx() + b.getDy() *b.getDy()));
@@ -42,7 +51,7 @@
       b.setDy(b.getDy() * adjuster);
       if (mouseClick.x < 0){
         b.setDx(b.getDx() * -1);
-        b.setDy(b.getDy() * -1);
+        b.setDy(b.getDy() * -1);     
       }
     }
   }
@@ -51,6 +60,8 @@
     if (!_inMotion){
       _inMotion = true;  
       createAngleVector();
+      //println (test.getYcor());
+      //println(mouseClick.y);
       adjustByAngle(test); 
       //System.out.println(mouse.x);
       //System.out.println(width/2);
@@ -90,6 +101,7 @@
  
   void drawAll(){
     createPointer(test);
+    _bubbleField.show();
     test.show();
     
   }
