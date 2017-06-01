@@ -1,4 +1,4 @@
-1StringCheese
+StringCheese
 Sasha Fomina
 Daniel Ju
 Kevin Li
@@ -110,5 +110,11 @@ Kevin :: Added descriptions for how the user plays the game and how the game wor
 --------------------------------------------------------------
 Sasha :: Added BubbleGrid class that populated a 2D array of Bubbles according to the hex grid layout with randomly colored Bubbles, so that every given Bubbble can only have a maximum of 6 neighbor Bubbles. Ensured that the xcors and ycors are such that the Bubble grid is displayed properly (an instance of type Bubble grid was added to the driver class).
 Daniel :: Fixed flowchart. Revised plan to the most updated version.
+Kevin :: 
+
+2017-05-31
+--------------------------------------------------------------
+Sasha :: Added setNeighbors method in BubbleGrid which ensures that all Bubbles keep track of their non-null neighbors including their unactive neighbors (state == 0). Modified populate so that half of the rows are filled with unactive bubble, in other words "open spaces" for bubbles to attach to. 
+Daniel ::
 Kevin :: 
 ==============================================================
