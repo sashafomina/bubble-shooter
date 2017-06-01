@@ -2,10 +2,11 @@
 <p> StringCheese </p>
 <p> APCS Pd 4: Sasha Fomina, Kevin Li, Daniel Ju </p>
 
-<h2> Launch Instructions </h2>
+<h2> Launch Instructions from Terminal: </h2>
 <ol>
-<li> Open Bubble_Shooter.pde, which is our driver file, in Processing </li>
-<li> Run Bubble_Shooter.pde and you can play the game! </li>
+<li> <code> $ git clone git@github.com:sfomina/StringCheese.git </code> </li>
+<li> <code> $ cd StringCheese </code> </li>
+<li> <code> $ processing Bubble_Shooter/Bubble_Shooter.pde </code> </li>
 </ol>
 
 <h2> Description </h2>
