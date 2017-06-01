@@ -8,6 +8,7 @@ public class BubbleGrid {
     _size = 0; 
     _bubbleGrid = new Bubble[13][20]; //column number must always be even
     populate();
+    setNeighbors();
   }
   
   public void populate(){
@@ -44,17 +45,42 @@ public class BubbleGrid {
     }
   }//end populate()
   
-  public void setNeighbors(){
+  
+public void setNeighbors(){
     for (int row = 0; row < _bubbleGrid.length ; row++){
       for (int col = 0; col < _bubbleGrid[0].length ; col ++){
+        
         if (_bubbleGrid[row][col] != null){
           ArrayList neighbors = _bubbleGrid[row][col].getNeighbors();
-          //neighbors.add(_bubbleGrid[row][col + 1];
+          
+          if (col < _bubbleGrid[0].length-2 && _bubbleGrid[row][col+2] != null){  
+            neighbors.add(_bubbleGrid[row][col + 2]);
+          }
+          
+          if (col < _bubbleGrid[0].length-1 && row < _bubbleGrid.length -1 && _bubbleGrid[row+1][col+1] != null){
+            neighbors.add(_bubbleGrid[row+1][col+1]); 
+          }
+           
+          if (col < _bubbleGrid[0].length-1 && row > 0 && _bubbleGrid[row-1][col+1] != null){
+              neighbors.add(_bubbleGrid[row-1][col+1]); 
+          }
+            
+          if (col > 1 && _bubbleGrid[row][col -2] != null){
+            neighbors.add(_bubbleGrid[row][col-2]);
+          }
+          
+          if (col > 0 && row > 0 && _bubbleGrid[row-1][col-1] != null){
+              neighbors.add(_bubbleGrid[row-1][col-1]);
+           }
+          
+          if (col > 0 && row < _bubbleGrid.length - 1 && _bubbleGrid[row+1][col-1] != null){
+              neighbors.add(_bubbleGrid[row+1][col-1]);
+          }  
+         } 
         }
-      }
-    }
-    
-  }
+       }
+     }
+     
   public void show(){
     for (int row = 0; row < _bubbleGrid.length ; row++){
       for (int col = 0; col < _bubbleGrid[0].length ; col++){
@@ -64,6 +90,10 @@ public class BubbleGrid {
         }
       }
     }
+  }
+  
+  public Bubble[][] getBubbleGrid(){
+    return _bubbleGrid;
   }
   
 }//end class BubbleGrid 
