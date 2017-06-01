@@ -44,6 +44,17 @@ public class BubbleGrid {
     }
   }//end populate()
   
+  public void setNeighbors(){
+    for (int row = 0; row < _bubbleGrid.length ; row++){
+      for (int col = 0; col < _bubbleGrid[0].length ; col ++){
+        if (_bubbleGrid[row][col] != null){
+          ArrayList neighbors = _bubbleGrid[row][col].getNeighbors();
+          //neighbors.add(_bubbleGrid[row][col + 1];
+        }
+      }
+    }
+    
+  }
   public void show(){
     for (int row = 0; row < _bubbleGrid.length ; row++){
       for (int col = 0; col < _bubbleGrid[0].length ; col++){
