@@ -1,4 +1,4 @@
-1StringCheese
+StringCheese
 Sasha Fomina
 Daniel Ju
 Kevin Li
@@ -114,7 +114,10 @@ Kevin ::
 
 2017-05-31
 --------------------------------------------------------------
-Sasha :: 
+<<<<<<< HEAD 
+==============================================================
+Sasha :: Added setNeighbors method in BubbleGrid which ensures that all Bubbles keep track of their non-null neighbors including their unactive neighbors (state == 0). Modified populate so that half of the rows are filled with unactive bubble, in other words "open spaces" for bubbles to attach to. 
 Daniel :: Attempted to create the inContact method, which checks to see if the bubble that is in motion comes into contact with a bubble thats already in the bubble field. Also tried to modify the move method so that if contact is reached, the bubble would be snapped into the bubble grid.
 Kevin :: 
 ==============================================================
+>>>>>>> fb36fee85b8c84bcdf9a810ebb54ad1e9bb0578c

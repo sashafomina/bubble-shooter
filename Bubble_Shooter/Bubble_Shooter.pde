@@ -95,11 +95,7 @@
     if (!_inMotion){
       _inMotion = true;  
       createAngleVector();
-      //println (test.getYcor());
-      //println(mouseClick.y);
       adjustByAngle(test); 
-      //System.out.println(mouse.x);
-      //System.out.println(width/2);
     }
   }
   
