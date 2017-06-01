@@ -136,6 +136,29 @@ public class Bubble {
          }
     }//O( )
 
+    //Determines if this particular bubble is in contact with another bubble on the bubble grid
+    public int[] inContact( Bubble other , BubbleGrid grid ){
+      int[] res = new int[2];
+      res[0] = -1;
+      for(int i = 0; i < 13; i ++){
+           for (int c = 0; c < 20; c ++){
+             Bubble a = grid.Get(i, c);
+             if (a == null){
+                 
+             }
+             else{
+               float distance = dist( _xcor, _ycor, a._xcor, a._ycor );
+               boolean ret = distance < (_radius + a._radius);
+               if (ret == true){
+                  res[0] = i;
+                  res[1] = c;
+               }
+             }
+           }
+        }
+        return res;
+    }
+    
     //returns the number of bubbles directly touching the bubble in question
     public int numNeighbors(){
         int count = 0;

@@ -9,6 +9,14 @@ public class BubbleGrid {
     _bubbleGrid = new Bubble[13][20]; //column number must always be even
     populate();
   }
+  //Accessor method for a particular bubble in the grid
+  public Bubble Get(int x, int y){
+     return  _bubbleGrid[x][y];
+  }
+  //Sets a particular spot of the grid as a particular bubble
+  public void Set(int x, int y, Bubble b){
+     _bubbleGrid[x][y] = b;
+  }
   
   public void populate(){
     int state = 1;

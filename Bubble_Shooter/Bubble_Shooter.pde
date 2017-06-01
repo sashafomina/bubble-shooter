@@ -29,8 +29,43 @@
   }
   
   void launch(Bubble b){
+    int[] a;
     if (_inMotion){
+      a = b.inContact(b, _bubbleField);
       b.move();
+      if (a[0] == -1){
+        
+      }
+      else{
+         int xcoord = a[0];
+         int ycoord = a[1];
+         float dx = b.getDx();
+         float dy = b.getDy();
+         if(dx < 0 && dy < 0){
+             _bubbleField.Set(xcoord + 1, ycoord + 1, b);
+         }
+         else if (dx < 0 && dy > 0){
+            _bubbleField.Set(xcoord + 1, ycoord - 1, b); 
+         }
+         else if (dx > 0 && dy < 0){
+            _bubbleField.Set(xcoord - 1, ycoord + 1, b);
+         }
+         else if (dx > 0 && dy > 0){
+            _bubbleField.Set(xcoord - 1, ycoord - 1, b); 
+         }
+         else if (dx < 0 && dy == 0.00){
+             _bubbleField.Set(xcoord + 2, ycoord, b);
+         }
+         else if (dx > 0 && dy == 0.00){
+             _bubbleField.Set(xcoord - 2, ycoord, b);
+         }
+         else if (dx == 0.00 && dy < 0){
+             _bubbleField.Set(xcoord, ycoord + 2, b);
+         }
+         else if (dx == 0.00 && dy > 0){
+             _bubbleField.Set(xcoord, ycoord - 2, b);
+         }
+      }
     }
   }
   
