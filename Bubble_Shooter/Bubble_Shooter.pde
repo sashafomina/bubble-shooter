@@ -60,14 +60,7 @@
     if (!_inMotion){
       _inMotion = true;  
       createAngleVector();
-      //println (test.getYcor());
-      //println(mouseClick.y);
       adjustByAngle(test); 
-      for (Bubble b: (_bubbleField.getBubbleGrid())[1][1].getNeighbors()){
-        println(b.getColor());;
-      }
-      //System.out.println(mouse.x);
-      //System.out.println(width/2);
     }
   }
   
