@@ -122,6 +122,6 @@ Kevin :: Fixed the dotted line, such that it has a limit of PI/12 out from the l
 2017-06-01
 --------------------------------------------------------------
 Sasha :: Transfered inContact method to the Bubble class. Added stick() and whichNeighbor() to the BubbleGird class, reworked Daniel's methods to use a different strategy in which the launched Bubble finds the first grid bubble it collides with and then searchs through its available neighbors to see which available slot is closest to the position of the bubble. Once the closest neighbor is found, the launched bubble's velocity is set to 0 and the launched bubble is set to a new random one to be launched. The closest neighbor is activated (state == 1) and its color is set to the color of the just launched bubble to create the illusion that the launched bubble was snapped in place.  
-Daniel :: 
+Daniel :: Created an updated plan. 
 Kevin :: Integrated previous edit to Daniel and Sasha's revised file, and debugged.
 ==============================================================
