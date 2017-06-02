@@ -1,6 +1,6 @@
 public class BubbleGrid {
   private Bubble[][] _bubbleGrid;
-  private int _size;
+  private int _size; //number of active bubbles
   public static final int RADIUS = 20;
   
   //Constructor 
@@ -10,12 +10,16 @@ public class BubbleGrid {
     populate();
     setNeighbors();
   }
+  
+  
   //Accessor method for a particular bubble in the grid
-  public Bubble Get(int x, int y){
+  public Bubble getBubble(int x, int y){
      return  _bubbleGrid[x][y];
   }
+  
+  
   //Sets a particular spot of the grid as a particular bubble
-  public void Set(int x, int y, Bubble b){
+  public void setBubble(int x, int y, Bubble b){
      _bubbleGrid[x][y] = b;
   }
   
@@ -24,6 +28,9 @@ public class BubbleGrid {
     for (int row = 0; row < _bubbleGrid.length ; row ++){
       if ( row > _bubbleGrid.length/2) {
         state = 0;
+      }
+      else {
+        _size ++;
       }
       for (int col = 0 ; col < _bubbleGrid[0].length ; col ++){
         if (row % 2 == 1){
@@ -103,5 +110,42 @@ public void setNeighbors(){
   public Bubble[][] getBubbleGrid(){
     return _bubbleGrid;
   }
+
+  //returns Bubble that the launched Bubble should attach to
+  public Bubble stick(Bubble launchedB){
+    Bubble attachTo = null;
+    boolean found = false;
+    for (int row = _bubbleGrid.length-1; row >= 0 ; row --){
+      for (int col = 0 ; col < _bubbleGrid[0].length ; col ++){
+        if (_bubbleGrid[row][col] != null && _bubbleGrid[row][col].getState() == 1 && launchedB.inContact(_bubbleGrid[row][col])){
+          attachTo = _bubbleGrid[row][col];
+          found = true;
+          break;
+        }
+        if (found){
+          break;
+        }
+      }
+    }
+    return attachTo;
+  }//end stick()
+ 
+ //takes launched bubbles and returns index of closest neighbor to the launched bubble
+ public int whichNeighbor(Bubble b){
+   Bubble attachTo = stick(b);
+    int indexOpen = 0;
+    for (int x = 0; x < attachTo.getNeighbors().size() ; x ++){
+      if (attachTo.getNeighbors().get(x).getState() == 0){
+        if (dist(b.getXcor(), b.getYcor(), attachTo.getNeighbors().get(x).getXcor(),attachTo.getNeighbors().get(x).getYcor() ) < dist(b.getXcor(), b.getYcor(), attachTo.getNeighbors().get(indexOpen).getXcor(), attachTo.getNeighbors().get(indexOpen).getYcor())){
+          indexOpen = x;
+        }
+      }
+    }
+    Bubble correctPos = attachTo.getNeighbors().get(indexOpen);
+    correctPos.setColor(b.getColor());
+    correctPos.setState(1); //for testing
+    return indexOpen;
+  }//end whichNeighbor()
+  
   
 }//end class BubbleGrid 

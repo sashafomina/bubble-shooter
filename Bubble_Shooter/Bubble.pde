@@ -42,7 +42,11 @@ public class Bubble {
     }
 
     //------ACCESSORS------
-
+    //returns radius of the bubble 
+    public float getRadius(){
+      return _radius;
+    }
+    
     //returns the Color of the bubble
     public int getColor(){
 	    return _color;
@@ -135,32 +139,17 @@ public class Bubble {
            _dy *= -1;
          }
     }//O( )
-
-    //Determines if this particular bubble is in contact with another bubble on the bubble grid
-    public int[] inContact( Bubble other , BubbleGrid grid ){
-      int[] res = new int[2];
-      res[0] = -1;
-      for(int i = 0; i < 13; i ++){
-           for (int c = 0; c < 20; c ++){
-             Bubble a = grid.Get(i, c);
-             if (a == null){
-                 
-             }
-             else{
-               float distance = dist( _xcor, _ycor, a._xcor, a._ycor );
-               boolean ret = distance < (_radius + a._radius);
-               if (ret == true){
-                  res[0] = i;
-                  res[1] = c;
-               }
-             }
-           }
-        }
-        return res;
-    }
     
-    //returns the number of bubbles directly touching the bubble in question
-    public int numNeighbors(){
+    public boolean inContact(Bubble other){
+      float x2 = other.getXcor();
+      float y2 = other.getYcor();
+      float r2 = other.getRadius();
+      return dist(_xcor, _ycor, x2, y2) <= r2 + _radius; 
+    }
+  
+   
+    //returns the number of bubbles directly touching the bubble in question 
+    public int numActiveNeighbors(){
         int count = 0;
         for (Bubble b : _neighbors){
           if (b.getState() == 1){
@@ -181,11 +170,7 @@ public class Bubble {
         return sameNeighbors;
     }//O( )
 
-    //returns whether a bubble has bubbles on top of it 
-    public  boolean NeighborsonTop(){ //why is this necessary?
-      return false;
-    }//O( )
-    
+
     public void show(){
       if (_state == 1){
         if (_color == BLUE){
@@ -206,5 +191,5 @@ public class Bubble {
         }
         ellipse(_xcor, _ycor, 2*_radius, 2*_radius);
       }
-    }
+   }
 }
