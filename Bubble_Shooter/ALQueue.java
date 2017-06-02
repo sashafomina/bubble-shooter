@@ -33,7 +33,7 @@ public class ALQueue<T> implements Queue<T>
     // means of removing an item from collection 
     public T dequeue() 
     {
-	return _queue.remove(0);
+	    return _queue.remove(0);
     }//O(n) bc n-1 shifted
 
 

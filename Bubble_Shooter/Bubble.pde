@@ -169,8 +169,7 @@ public class Bubble {
         }
         return sameNeighbors;
     }//O( )
-
-
+    
     public void show(){
       if (_state == 1){
         if (_color == BLUE){

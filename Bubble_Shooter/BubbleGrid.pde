@@ -59,6 +59,7 @@ public class BubbleGrid {
       }
     }
   }//end populate()
+     
   
   
 public void setNeighbors(){
