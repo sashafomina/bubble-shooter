@@ -37,6 +37,10 @@ public class Bubble {
       this (x , y , 0 , 0 , (int) random(0,5) , state);
     }
     
+    public Bubble(int ncolor){
+      this(width/2 , height-45 , 0 , 0 , ncolor , 1);
+    }
+    
     public Bubble(){
       this(width/2, height - 45, 0 , 0, (int) random(0,5), 1);
     }
@@ -169,6 +173,28 @@ public class Bubble {
         }
         return sameNeighbors;
     }//O( )
+    
+    public void showQueueBubble(int index){
+      if (_state == 1){
+        if (_color == BLUE){
+          fill(10,27,216);
+        
+        }
+        else if (_color == RED){
+          fill (216, 10,10);
+        }
+        else if (_color == YELLOW){
+          fill(229,255,2);
+        }
+        else if (_color == GREEN){
+          fill(25, 244, 9);
+        }
+        else if (_color == PINK){
+          fill(255, 0 ,250);
+        }
+        ellipse(index*2*_radius + _radius + 2, height - _radius, _radius, _radius);
+      }
+    }
     
     public void show(){
       if (_state == 1){

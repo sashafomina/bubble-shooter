@@ -1,46 +1,51 @@
   Bubble test;
-  Bubble test1;
-  Bubble test2;
-  Bubble test3;
   boolean _inMotion;
   PVector mouseClick;
   PVector center;
   BubbleGrid _bubbleField; 
-  ALQueue<Bubble> bubbles;
+  ALQueue<Bubble> _upNext;
+  //ALQueue<Bubble> _testq;
   
   static final float SPEED = 12;
 
   
   void setup(){
+    //_testq = new ALQueue<Bubble>();
+     //_testq.enqueue(new Bubble(0));
+     //_testq.enqueue(new Bubble(0));
+     //_testq.enqueue(new Bubble(4));
      size(421, 600);
-     bubbles = new ALQueue<Bubble>();
-     test1 = new Bubble();
-     test2 = new Bubble();
-     test3 = new Bubble();
-     bubbles.enqueue(test1);
-     bubbles.enqueue(test2);
-     bubbles.enqueue(test3);
      _inMotion = false;
-     center = new PVector(bubbles.peekFront().getXcor(), bubbles.peekFront().getYcor());
      _bubbleField = new BubbleGrid(); 
+     _upNext = new ALQueue<Bubble>();
+     populateQueue();
+     //test = new Bubble();
+     test = _upNext.dequeue();
+     _upNext.enqueue(new Bubble());
+     center = new PVector(test.getXcor(), test.getYcor());
+     //println(_upNext.peekFront());
      noStroke();
   }
   
   void draw(){
-    test = bubbles.peekFront();
     background(255,255,255);
     launch(test);
+    snap();
+    drawAll();
+  }
+  
+  
+  
+  void snap(){
     if (_inMotion && _bubbleField.stick(test) != null){
       test.setDx(0);
       test.setDy(0);
       _bubbleField.whichNeighbor(test); 
       _inMotion = false;
-      test = new Bubble();  
-      bubbles.dequeue();
-      bubbles.enqueue(test);
+      test = _upNext.dequeue(); 
+      //println(test.getColor());
+      _upNext.enqueue(new Bubble());
     }
-    drawAll();
-
   }
   
   void createAngleVector() {
@@ -155,10 +160,19 @@
      noStroke();
     }
   }
+  
+  void populateQueue(){
+    for (int x = 0 ; x < 3 ; x++){
+      _upNext.enqueue(new Bubble());
+    }
+  }
+  
     
   void drawAll(){
     createPointer(test);
     _bubbleField.show();
     test.show();
+    //_testq.show();
+    _upNext.show();
   }
   
