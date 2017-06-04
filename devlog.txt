@@ -117,11 +117,28 @@ Kevin :: Worked on creating the dotted line for launching and aiming the bubbble
 Sasha :: Added setNeighbors method in BubbleGrid which ensures that all Bubbles keep track of their non-null neighbors including their unactive neighbors (state == 0). Modified populate so that half of the rows are filled with unactive bubble, in other words "open spaces" for bubbles to attach to. 
 Daniel :: Attempted to create the inContact method, which checks to see if the bubble that is in motion comes into contact with a bubble thats already in the bubble field. Also tried to modify the move method so that if contact is reached, the bubble would be snapped into the bubble grid.
 Kevin :: Fixed the dotted line, such that it has a limit of PI/12 out from the left and right bottom sides of the screen as options to shoot, and fixed appearance of the line including thickness and color.
-==============================================================
 
 2017-06-01
 --------------------------------------------------------------
 Sasha :: Transfered inContact method to the Bubble class. Added stick() and whichNeighbor() to the BubbleGird class, reworked Daniel's methods to use a different strategy in which the launched Bubble finds the first grid bubble it collides with and then searchs through its available neighbors to see which available slot is closest to the position of the bubble. Once the closest neighbor is found, the launched bubble's velocity is set to 0 and the launched bubble is set to a new random one to be launched. The closest neighbor is activated (state == 1) and its color is set to the color of the just launched bubble to create the illusion that the launched bubble was snapped in place.  
 Daniel :: Created an updated plan. Editted BubbleShooter to implement a queue of all upcoming bubbles.
-Kevin :: Integrated previous edit to Daniel and Sasha's revised file, and debugged.
+Kevin :: 
+
+
+2017-06-03
+--------------------------------------------------------------
+Sasha :: Fixed bug - although the dotted line was limited to an angle of PI/12 the launching movement of the bubble was not, so I limited it to PI/12. Worked on popping mechanism.
+Daniel :: 
+Kevin :: 
+
+2017-06-04
+--------------------------------------------------------------
+Sasha :: Implemented popping mechanism using recursion and a linked list. When a bubble is snapped into place a linked list cluster is recursively created that contains all its same color neighbors and the same color neighbors of its neighbors and ... ect. To ensure that no bubble is added into the cluster twice, a new boolean instance var of Bubble (_checked) was added. The pop() method is then invoked. If cluster is greater in size than 3, then all its constituents' states are set to -1 and removed from the cluster as their _checked vars are set back to false. Otherwise, they are removed from the cluster their _checked vars is set to false but their states remain 1. UNRESOLVED PROBLEM: there are hanging bubbles, that are not attached to anything once the cluster is popped which remain active.
+Daniel :: 
+Kevin :: 
 ==============================================================
+
+
+
+
+
