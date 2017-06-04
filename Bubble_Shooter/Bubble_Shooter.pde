@@ -65,8 +65,12 @@
   void adjustByAngle(Bubble b){
     if (mouseClick.x != 0){
       float m;
-      if (mouseClick.y > 0){
-        m = 0;
+      println(mouseClick.x);
+      if (mouseClick.y > -12 && mouseClick.x < 0){
+        m = tan(PI/12);
+      }
+      else if (mouseClick.y > -12 && mouseClick.x > 0){
+        m = -1*tan(PI/12);
       }
       else{
         m = mouseClick.y/mouseClick.x;
@@ -80,6 +84,9 @@
         b.setDx(b.getDx() * -1);
         b.setDy(b.getDy() * -1);     
       }
+    }
+    else {
+      b.setDy(-1*SPEED);
     }
   }
   
