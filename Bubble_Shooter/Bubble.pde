@@ -12,6 +12,7 @@ public class Bubble {
     private float _xcor;
     private float _ycor;
     private ArrayList<Bubble> _neighbors;
+    private boolean _checked;
 
     public static final int  RED = 0;
     public static final int BLUE = 1;
@@ -31,6 +32,7 @@ public class Bubble {
       _dy = dy;
       _color = ncolor;
       _state = state;
+      _checked = false;
     }
     
     public Bubble(float x , float y, int state){
@@ -86,6 +88,9 @@ public class Bubble {
 	     return _neighbors;
     }//O( )
    
+   public boolean getChecked(){
+     return _checked;
+   }
     //------MUTATORS------
 
     //sets the Color of the bubble
@@ -124,6 +129,9 @@ public class Bubble {
       _ycor = newCor;
     }//O( )
 
+    public void setChecked(boolean checked){
+      _checked = checked;
+    }
     //------OTHER METHODS------
 
     //determines how a bubble moves given certain states
@@ -167,7 +175,7 @@ public class Bubble {
     public ArrayList<Bubble> getSameNeighbors(){
         ArrayList sameNeighbors = new ArrayList();
         for (Bubble b : _neighbors){
-          if (b.getColor() == _color){
+          if (b.getColor() == _color && b.getState() == 1){
             sameNeighbors.add(b);
           }
         }

@@ -10,20 +10,14 @@
 
   
   void setup(){
-    //_testq = new ALQueue<Bubble>();
-     //_testq.enqueue(new Bubble(0));
-     //_testq.enqueue(new Bubble(0));
-     //_testq.enqueue(new Bubble(4));
      size(421, 600);
      _inMotion = false;
      _bubbleField = new BubbleGrid(); 
      _upNext = new ALQueue<Bubble>();
      populateQueue();
-     //test = new Bubble();
      test = _upNext.dequeue();
      _upNext.enqueue(new Bubble());
      center = new PVector(test.getXcor(), test.getYcor());
-     //println(_upNext.peekFront());
      noStroke();
   }
   
@@ -40,12 +34,19 @@
     if (_inMotion && _bubbleField.stick(test) != null){
       test.setDx(0);
       test.setDy(0);
-      _bubbleField.whichNeighbor(test); 
+      Bubble correct = _bubbleField.whichNeighbor(test); 
       _inMotion = false;
-      test = _upNext.dequeue(); 
-      //println(test.getColor());
-      _upNext.enqueue(new Bubble());
+      //println(correct.getNeighbors().size());
+      _bubbleField.createCluster(correct);
+      _bubbleField.pop();
+      recharge();
+      
     }
+  }
+  
+  void recharge(){
+    test = _upNext.dequeue(); 
+    _upNext.enqueue(new Bubble());
   }
   
   void createAngleVector() {
@@ -65,7 +66,7 @@
   void adjustByAngle(Bubble b){
     if (mouseClick.x != 0){
       float m;
-      println(mouseClick.x);
+      //println(mouseClick.x);
       if (mouseClick.y > -12 && mouseClick.x < 0){
         m = tan(PI/12);
       }
