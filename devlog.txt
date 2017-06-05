@@ -14,7 +14,6 @@ OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
 
-
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
@@ -22,7 +21,6 @@ UNRESOLVED ISSUES
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 -
-
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -33,8 +31,6 @@ LESSONS LEARNED
 -
 
 ||||||||||||||||||||||||||||||||||||||||||
-
-
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
@@ -48,19 +44,14 @@ LESSONS LEARNED
 2017-05-17
 --------------------------------------------------------------
 Sasha :: wrote up proposal based on discussion with Kevin and Daniel 
-Daniel :: 
-Kevin ::
 
 2017-05-18
 --------------------------------------------------------------
 Sasha :: wrote up the first version of the plan and preliminary notes for the more of the speicifics of the design in a shared google doc
-Daniel ::
 Kevin :: Edited and suggested changes to Sasha's initial plan draft, changes to be uploaded later.
 
 2017-05-21
 --------------------------------------------------------------
-Sasha :: 
-Daniel ::
 Kevin :: Created basic processing sketch for ball and ballshooter
 
 2017-05-22
@@ -71,46 +62,34 @@ Kevin :: Came up with more ways to implement semester 2 data structures and algo
 
 2017-05-23
 --------------------------------------------------------------
-Sasha :: 
 Daniel :: Updated the proposal to reflect comments from Mr. Brown. Uploaded proposal to Git repo. Also created the flow chart.
-Kevin :: 
 
 2017-05-24
 --------------------------------------------------------------
-Sasha :: 
 Daniel :: Worked on integrating loops into our flowchart
 Kevin :: Worked on integrating loops into our flowchart
 
 2017-05-25
 --------------------------------------------------------------
-Sasha :: 
-Daniel :: 
 Kevin :: Began working on the Bubble class
 
 2017-05-26
 --------------------------------------------------------------
-Sasha :: 
-Daniel :: 
 Kevin :: Finished the Bubble skeleton
 
 2017-05-27
 --------------------------------------------------------------
 Sasha :: Filled in Bubble skeleton and started Bubble_Shooter driver class. A test Bubble in the drive class is now able to be launched based on the angle of themouse click and a pointer line of a certain length is draw from the bubble's startign position to based on the angle of the mouse hovering. Bubble can only be launched once.
 
-Daniel :: 
-Kevin ::
-
 2017-05-29
 --------------------------------------------------------------
-Sasha :: 
-Daniel :: 
 Kevin :: Added descriptions for how the user plays the game and how the game works into the READme
 
 2017-05-30
 --------------------------------------------------------------
 Sasha :: Added BubbleGrid class that populated a 2D array of Bubbles according to the hex grid layout with randomly colored Bubbles, so that every given Bubbble can only have a maximum of 6 neighbor Bubbles. Ensured that the xcors and ycors are such that the Bubble grid is displayed properly (an instance of type Bubble grid was added to the driver class).
 Daniel :: Fixed flowchart. Revised plan to the most updated version.
-Kevin :: Worked on creating the dotted line for launching and aiming the bubbble.
+Kevin :: Worked on creating the dotted line for launching and aiming the bubbble. Used a loop to recreate a line, updating the start and endpoints to advance on the same line (following the same slope) each time. The color and size of the line was also adjusted for a better visual impression.
 
 2017-05-31
 --------------------------------------------------------------
@@ -122,20 +101,19 @@ Kevin :: Fixed the dotted line, such that it has a limit of PI/12 out from the l
 --------------------------------------------------------------
 Sasha :: Transfered inContact method to the Bubble class. Added stick() and whichNeighbor() to the BubbleGird class, reworked Daniel's methods to use a different strategy in which the launched Bubble finds the first grid bubble it collides with and then searchs through its available neighbors to see which available slot is closest to the position of the bubble. Once the closest neighbor is found, the launched bubble's velocity is set to 0 and the launched bubble is set to a new random one to be launched. The closest neighbor is activated (state == 1) and its color is set to the color of the just launched bubble to create the illusion that the launched bubble was snapped in place.  
 Daniel :: Created an updated plan. Editted BubbleShooter to implement a queue of all upcoming bubbles.
-Kevin :: 
+Kevin :: Revised READme gameplay instructions based on examples from other groups.
 
 
 2017-06-03
 --------------------------------------------------------------
 Sasha :: Fixed bug - although the dotted line was limited to an angle of PI/12 the launching movement of the bubble was not, so I limited it to PI/12. Worked on popping mechanism.
-Daniel :: 
-Kevin :: 
+Kevin :: Attempted to cut the dotted line short so that it doesn't go past bubbles on the bubble grid, but nothing has worked yet-- will consult with Sasha and Daniel in the coming days.
 
 2017-06-04
 --------------------------------------------------------------
 Sasha :: Implemented popping mechanism using recursion and a linked list. When a bubble is snapped into place a linked list cluster is recursively created that contains all its same color neighbors and the same color neighbors of its neighbors and ... ect. To ensure that no bubble is added into the cluster twice, a new boolean instance var of Bubble (_checked) was added. The pop() method is then invoked. If cluster is greater in size than 3, then all its constituents' states are set to -1 and removed from the cluster as their _checked vars are set back to false. Otherwise, they are removed from the cluster their _checked vars is set to false but their states remain 1. UNRESOLVED PROBLEM: there are hanging bubbles, that are not attached to anything once the cluster is popped which remain active.
-Daniel :: 
-Kevin :: 
+Daniel :: Skyped Kevin to consult about the problems with the floating bubbles.
+Kevin :: Skyped Daniel in the evening to discuss a solution to the problem of floating bubbles not popping, i.e. even though a cluster of bubbles of the same colors would pop, it can potential leave other colored bubbles floating. We came up with a solution that uses recursive backtracking to check if a bubble's side and bottom neighbors have any top neighbors. New instance variables were created for the Bubble class, called _checked and _floating, both booleans that aid in the solution. New methods were also created ArrayList<Bubble>s of a certain type of neighbor, like side neighbors and top neighbors, because we found them useful. Code is still not completely debugged, however.
 ==============================================================
 
 
