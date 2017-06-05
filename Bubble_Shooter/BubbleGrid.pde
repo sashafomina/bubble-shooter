@@ -66,7 +66,6 @@ public class BubbleGrid {
         if (Bub != null) {
           if (Bub.getState() == 1) {
             Bub.isFloating();
-            println (Bub.isFloating());
           }
         }
       }

@@ -228,16 +228,16 @@ public class Bubble {
   }
 
   public boolean isFloating(){
-     ArrayList<Bubble> topNeighbors = this.getNeighborsonTop();
-     if (topNeighbors.size() != 0){
+     println (this.getNeighborsonTop().size());
+     if (this.getNeighborsonTop().size() != 0){
        _floating = false;
      }
-     else if (topNeighbors.size() == 0 &&  this.neighborsChecked()){
+     else if (this.getNeighborsonTop().size() == 0 &&  this.neighborsChecked()){
         _floating = true;
      }
      else{
          _checked = true;
-         if (topNeighbors.size() == 0){
+         if (this.getNeighborsonTop().size() == 0){
            if (this._neighbors.size() == 1){
               _floating = true && _neighbors.get(0).isFloating(); 
            }
