@@ -182,7 +182,7 @@ public class Bubble {
   public ArrayList<Bubble> getNeighborsonTop() {
     ArrayList topNeighbors = new ArrayList();
     for (Bubble b : _neighbors) {
-      if (b._ycor > this._ycor) {
+      if (b._ycor < this._ycor) {
         topNeighbors.add(b);
       }
     }
