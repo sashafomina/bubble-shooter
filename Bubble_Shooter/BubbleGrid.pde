@@ -64,7 +64,10 @@ public class BubbleGrid {
     }
     for (Bubble[] bub: _bubbleGrid){
         for (Bubble Bub: bub){
-           Bub.isFloating();
+           if (Bub.getState() == 1){
+             Bub.isFloating();
+             println (Bub.isFloating());
+           }
         }
     }
     for (Bubble[] bub: _bubbleGrid){
