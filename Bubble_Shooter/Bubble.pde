@@ -217,6 +217,33 @@ public class Bubble {
     }
   }
 
+  public boolean isFloating(){
+     ArrayList<Bubble> topNeighbors = this.getNeighborsonTop();
+     if (topNeighbors.size() != 0){
+     }
+     else if (topNeighbors.size() == 0 && this.numActiveNeighbors() == 0){
+        _floating = true;
+     }
+     else{
+         if (topNeighbors.size() == 0){
+           _checked = true;
+           if (this._neighbors.size() == 1){
+              _floating = true && _neighbors.get(0).isFloating(); 
+           }
+           else if (this._neighbors.size() == 2){
+              _floating = true && _neighbors.get(0).isFloating() && _neighbors.get(1).isFloating(); 
+           }
+           else if (this._neighbors.size() == 3){
+              _floating = true && _neighbors.get(0).isFloating() && _neighbors.get(1).isFloating() && _neighbors.get(2).isFloating(); 
+           }
+           else{
+              _floating = true && _neighbors.get(0).isFloating() && _neighbors.get(1).isFloating() && _neighbors.get(2).isFloating() && _neighbors.get(3).isFloating(); 
+           }  
+       }
+     }
+     return _floating;
+  }
+
   public void show() {
     if (_state == 1) {
       if (_color == BLUE) {

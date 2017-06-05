@@ -53,7 +53,8 @@ public class BubbleGrid {
         _cluster.get(0).setChecked(false);
         _cluster.remove();
       }
-    } else {
+    } 
+    else {
       while (_cluster.size() != 0) {
         Bubble current = _cluster.get(0);
         current.setChecked(false);
@@ -61,6 +62,18 @@ public class BubbleGrid {
         _cluster.remove();
       }
     }
+    for (Bubble[] bub: _bubbleGrid){
+        for (Bubble Bub: bub){
+           Bub.isFloating();
+        }
+    }
+    for (Bubble[] bub: _bubbleGrid){
+        for (Bubble Bub: bub){
+            if (Bub.getFloating() == true && Bub.getState() == 1){
+               Bub.setState(-1);
+           }
+        }
+    }    
   }
 
 
@@ -140,7 +153,6 @@ public class BubbleGrid {
         }
       }
     }
-  }
 
     for (int i = 0; i < _bubbleGrid.length; i++) {
       for (int n = 0; n < _bubbleGrid[i].length; n++) {
@@ -150,7 +162,7 @@ public class BubbleGrid {
         }
       }
     }
-    
+  }
   public Bubble[][] getBubbleGrid() {
     return _bubbleGrid;
   }
