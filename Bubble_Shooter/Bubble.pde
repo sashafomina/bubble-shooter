@@ -13,6 +13,7 @@ public class Bubble {
   private float _ycor;
   private ArrayList<Bubble> _neighbors;
   private boolean _checked;
+  private boolean _floating;
 
   public static final int  RED = 0;
   public static final int BLUE = 1;
@@ -33,6 +34,7 @@ public class Bubble {
     _color = ncolor;
     _state = state;
     _checked = false;
+    _floating = false;
   }
 
   public Bubble(float x, float y, int state) {
@@ -67,6 +69,10 @@ public class Bubble {
   public float getDx() {
     return _dx;
   }//O( )
+
+  public boolean getFloating(){
+     return _floating; 
+  }
 
   //returns the y velocity of the bubble
   public float getDy() {
@@ -117,6 +123,10 @@ public class Bubble {
   public void setDy(float newVelocity) {
     _dy = newVelocity;
   }//O( )
+  
+  public void setFloating(boolean bool){
+     _floating = bool; 
+  }
 
   //sets the x cor of the bubble
   public void setXcor(float newCor) {
