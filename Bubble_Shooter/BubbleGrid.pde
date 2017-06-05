@@ -53,8 +53,7 @@ public class BubbleGrid {
         _cluster.get(0).setChecked(false);
         _cluster.remove();
       }
-    } 
-    else {
+    } else {
       while (_cluster.size() != 0) {
         Bubble current = _cluster.get(0);
         current.setChecked(false);
@@ -62,21 +61,25 @@ public class BubbleGrid {
         _cluster.remove();
       }
     }
-    for (Bubble[] bub: _bubbleGrid){
-        for (Bubble Bub: bub){
-           if (Bub.getState() == 1){
-             Bub.isFloating();
-             println (Bub.isFloating());
-           }
+    for (Bubble[] bub : _bubbleGrid) {
+      for (Bubble Bub : bub) {
+        if (Bub != null) {
+          if (Bub.getState() == 1) {
+            Bub.isFloating();
+            println (Bub.isFloating());
+          }
         }
+      }
     }
-    for (Bubble[] bub: _bubbleGrid){
-        for (Bubble Bub: bub){
-            if (Bub.getFloating() == true && Bub.getState() == 1){
-               Bub.setState(-1);
-           }
+    for (Bubble[] bub : _bubbleGrid) {
+      for (Bubble Bub : bub) {
+        if (Bub != null) {
+          if (Bub.getFloating() == true && Bub.getState() == 1) {
+          Bub.setState(-1);
         }
-    }    
+        }
+      }
+    }
   }
 
 
@@ -153,15 +156,6 @@ public class BubbleGrid {
         if (_bubbleGrid[row][col] != null) {
           _bubbleGrid[row][col].show();
           //println (_bubbleGrid[row][col].getXcor() + " , " + _bubbleGrid[row][col].getYcor());
-        }
-      }
-    }
-
-    for (int i = 0; i < _bubbleGrid.length; i++) {
-      for (int n = 0; n < _bubbleGrid[i].length; n++) {
-        if ((_bubbleGrid[i][n] != null) && (_bubbleGrid[i][n]._neighbors.size() == _bubbleGrid[i][n].getSameNeighbors().size())) {
-          _bubbleGrid[i][n].setState(-1);
-          println("poop");
         }
       }
     }

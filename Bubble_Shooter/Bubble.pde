@@ -178,7 +178,7 @@ public class Bubble {
     }
     return count;
   }//O( )
-
+  
   public ArrayList<Bubble> getNeighborsonTop() {
     ArrayList topNeighbors = new ArrayList();
     for (Bubble b : _neighbors) {
@@ -187,6 +187,16 @@ public class Bubble {
       }
     }
     return topNeighbors;
+  }
+  
+  public boolean neighborsChecked(){
+    boolean ret = true;
+    for (Bubble b : _neighbors){
+      if (!b._checked){
+        ret = false;
+      }
+    }
+    return ret;
   }
 
   //returns an ArrayList containing all of a bubble's neighbors that share its color.
@@ -220,13 +230,14 @@ public class Bubble {
   public boolean isFloating(){
      ArrayList<Bubble> topNeighbors = this.getNeighborsonTop();
      if (topNeighbors.size() != 0){
+       _floating = false;
      }
-     else if (topNeighbors.size() == 0 && this.numActiveNeighbors() == 0){
+     else if (topNeighbors.size() == 0 &&  this.neighborsChecked()){
         _floating = true;
      }
      else{
+         _checked = true;
          if (topNeighbors.size() == 0){
-           _checked = true;
            if (this._neighbors.size() == 1){
               _floating = true && _neighbors.get(0).isFloating(); 
            }
