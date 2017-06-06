@@ -123,6 +123,12 @@ Kevin ::
 ==============================================================
 
 
-
+Things we still need to do:
+1. Fix the bug with the updating of rows of bubbles
+2. Create a cover page that player returns to when they lose.
+3. Create a scoring system, and display it after game ends.
+4. The undo button
+5. Make pop appear as if the bubbles fall down
+6. Different difficulty settings???
 
 
