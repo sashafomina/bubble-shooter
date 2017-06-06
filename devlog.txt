@@ -124,7 +124,7 @@ Kevin ::
 2017-06-05
 --------------------------------------------------------------
 Sasha ::
-Daniel :: Updated Bubble_Shooter to implement a start screen and a way for the game to restart.
+Daniel :: Updated Bubble_Shooter to implement a start screen and a way for the game to restart. Also created a system to keep track of player's score and largest cluster of bubbles popped. 
 Kevin :: 
 ==============================================================
 
