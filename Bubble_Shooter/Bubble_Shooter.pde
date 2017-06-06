@@ -23,6 +23,7 @@
   boolean modeTwo;
   boolean modeThree;
   boolean restarting;
+  PImage Bubs;
   //ALQueue<Bubble> _testq;
   
   static final float SPEED = 12;
@@ -30,6 +31,7 @@
   
   void setup(){
      size(421, 600);
+     Bubs = loadImage ("bubbles.jpg");
      _inMotion = false;
      _bubbleField = new BubbleGrid(); 
      _upNext = new ALQueue<Bubble>();
@@ -67,10 +69,10 @@
   }
   
   void initScreen(){
-     background(150);
-     fill(175, 100, 220);
+     background(Bubs);
+     fill(250, 0, 0);
      textAlign(CENTER);
-     textSize(20);
+     textSize(30);
      text("Select Game Mode Below", 200, 50);
      fill(175,175,0);
      rect(x1, y1, w1, h1);
