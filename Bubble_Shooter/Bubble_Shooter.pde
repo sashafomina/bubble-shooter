@@ -6,6 +6,23 @@
   ALQueue<Bubble> _upNext;
   int _counter;
   boolean loseYet;
+  int gameScreen = 0;
+  int x1 = 125;
+  int y1 = 75;
+  int w1 = 150;
+  int h1 = 80;
+  int x2 = 125;
+  int y2 = 200;
+  int w2 = 150;
+  int h2 = 80;
+  int x3 = 125;
+  int y3 = 325;
+  int w3 = 150;
+  int h3 = 80;
+  boolean modeOne;
+  boolean modeTwo;
+  boolean modeThree;
+  boolean restarting;
   //ALQueue<Bubble> _testq;
   
   static final float SPEED = 12;
@@ -13,7 +30,6 @@
   
   void setup(){
      size(421, 600);
-     _counter = 10;
      _inMotion = false;
      _bubbleField = new BubbleGrid(); 
      _upNext = new ALQueue<Bubble>();
@@ -22,18 +38,63 @@
      _upNext.enqueue(new Bubble());
      center = new PVector(test.getXcor(), test.getYcor());
      loseYet = false;
-     noStroke();
+     stroke(0);
+     noFill();
+     modeOne = false;
+     modeTwo = false;
+     modeThree = false;
+     restarting = false;
   }
   
   void draw(){
+   if (gameScreen == 0){
+      initScreen();
+   }
+   else if (gameScreen == 1){
       background(255,255,255);
       launch(test);
       snap();
       drawAll();
-    
+   } 
+   else if (gameScreen == 2){
+     gameOverScreen();
+   }
   }
   
   
+  void startGame(){
+     gameScreen = 1; 
+  }
+  
+  void initScreen(){
+     background(150);
+     fill(175, 100, 220);
+     textAlign(CENTER);
+     textSize(20);
+     text("Select Game Mode Below", 200, 50);
+     fill(175,175,0);
+     rect(x1, y1, w1, h1);
+     rect(x2, y2, w2, h2);
+     rect(x3, y3, w3, h3);
+     textSize(20);
+     fill(175, 100, 220);
+     text("Easy Regular", 200, 125);
+     text("Hard Regular", 200, 250);
+     text("Arcade Mode", 200, 375);
+  }
+  
+  void gameOverScreen(){
+     background(150);
+     fill(175, 100, 220);
+     textAlign(CENTER);
+     textSize(35);
+     text("Game Over", 200, 50);
+     fill(0,175,0);
+     rect(125, 425, 150, 80);
+     fill(255);
+     textSize(20);
+     text("Start Again", 200, 475);
+  }
   
   void snap(){
     if (_inMotion && _bubbleField.stick(test) != null){
@@ -48,6 +109,26 @@
       
     }
   }
+  
+  void update(int x, int y) {
+    if (gameScreen == 0){
+      if ( ModeOne(x1, y1, w1, h1) ) {
+          modeOne = true;
+      } 
+      else if ( ModeTwo(x2, y2, w2, h2) ) {
+          modeTwo = true;
+      } 
+      else if ( ModeThree(x3, y3, w3, h3) ){
+          modeThree = true;
+      }
+    }
+    else if(gameScreen == 2){
+      if ( ReStarting(125, 425, 150, 80)){
+         restarting = true; 
+      }
+    }
+  }
+  
   
   void recharge(){
     test = _upNext.dequeue(); 
@@ -65,7 +146,37 @@
     }
   }
   
-
+  boolean ModeOne(int x, int y, int w, int h){
+    if (mouseX >= x && mouseX <= x+w && mouseY >= y && mouseY <= y+h) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  boolean ModeTwo(int x, int y, int w, int h){
+    if (mouseX >= x && mouseX <= x+w && mouseY >= y && mouseY <= y+h) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  boolean ModeThree(int x, int y, int w, int h){
+    if (mouseX >= x && mouseX <= x+w && mouseY >= y && mouseY <= y+h) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  boolean ReStarting(int x, int y, int w, int h){
+    if (mouseX >= x && mouseX <= x+w && mouseY >= y && mouseY <= y+h) {
+      return true;
+    } else {
+      return false;
+    }
+  }  
   
   //adjusts the dx and dy of the Bubble based on the angle of movement decided by the mouse
   void adjustByAngle(Bubble b){
@@ -97,11 +208,35 @@
   }
   
   void mouseClicked(){
-    if (!_inMotion){
-      _inMotion = true;  
-      createAngleVector();
-      adjustByAngle(test);
-      _counter -= 1;
+    if (gameScreen == 0){
+      update (mouseX, mouseY);
+      if (modeOne){
+         _counter = 10;
+         startGame();
+      }
+      else if(modeTwo){
+        _counter = 8;
+        startGame();
+      }
+      else if(modeThree){
+        _counter = 10;
+        startGame();
+      }
+    }
+    else if (gameScreen == 1){
+       if (!_inMotion){
+        _inMotion = true;  
+        createAngleVector();
+        adjustByAngle(test);
+        _counter -= 1;
+      }
+    }
+    else if (gameScreen == 2){
+        update (mouseX, mouseY);
+        if (restarting){
+          _bubbleField = new BubbleGrid();
+          gameScreen = 0;
+        }
     }
   }
   
@@ -180,11 +315,6 @@
       _upNext.enqueue(new Bubble());
     }
   }
-  
-  
-  void loseGame(){
-      
-  }
     
   void drawAll(){
     createPointer(test);
@@ -198,7 +328,8 @@
     }
     loseYet = _bubbleField.checkGameStatus();
     if(loseYet){
-       this.loseGame();
+       loseYet = false;
+       gameScreen = 2;
     }
   }
   
