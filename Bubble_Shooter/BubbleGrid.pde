@@ -113,6 +113,41 @@ public class BubbleGrid {
     }
   }
   
+  public void Redraw(){
+     for (int row = _bubbleGrid.length - 1; row > 0; row --){
+        for (int c = 0; c < _bubbleGrid[0].length; c ++){
+            if (c % 2 == 0){
+               if (_bubbleGrid[row][c] != null){
+                  _bubbleGrid[row][c].setColor(_bubbleGrid[row - 1][c + 1].getColor());
+                  if (_bubbleGrid[row][c].getState() != 1 && _bubbleGrid[row - 1][c + 1].getState() == 1){
+                     _bubbleGrid[row][c].setState(1); 
+                  }
+               }
+            }
+            else{
+               if (_bubbleGrid[row][c] != null){
+                  _bubbleGrid[row][c].setColor(_bubbleGrid[row - 1][c - 1].getColor());
+                  if (_bubbleGrid[row][c].getState() != 1 && _bubbleGrid[row - 1][c - 1].getState() == 1){
+                     _bubbleGrid[row][c].setState(1); 
+                  }
+               }
+            }
+        }
+     }
+     for (int col = 0; col < _bubbleGrid[0].length; col ++){
+       if (col % 2 == 1){
+             _bubbleGrid[0][col] = null;
+       }
+       else if ( col != 0) {
+             _bubbleGrid[0][col] = new Bubble(2*RADIUS*(col/2) + RADIUS , RADIUS , 1);
+            
+       }
+       else {
+             _bubbleGrid[0][col] = new Bubble(RADIUS, RADIUS, 1);
+       }
+    }
+  }
+  
   public void resetHanging(){
     for (int row = 0; row < _bubbleGrid.length ; row ++){
       for (int c = 0; c< _bubbleGrid[0].length; c ++){

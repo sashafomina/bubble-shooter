@@ -4,6 +4,7 @@
   PVector center;
   BubbleGrid _bubbleField; 
   ALQueue<Bubble> _upNext;
+  int _counter;
   //ALQueue<Bubble> _testq;
   
   static final float SPEED = 12;
@@ -11,6 +12,7 @@
   
   void setup(){
      size(421, 600);
+     _counter = 10;
      _inMotion = false;
      _bubbleField = new BubbleGrid(); 
      _upNext = new ALQueue<Bubble>();
@@ -22,10 +24,10 @@
   }
   
   void draw(){
-    background(255,255,255);
-    launch(test);
-    snap();
-    drawAll();
+      background(255,255,255);
+      launch(test);
+      snap();
+      drawAll();
   }
   
   
@@ -95,7 +97,8 @@
     if (!_inMotion){
       _inMotion = true;  
       createAngleVector();
-      adjustByAngle(test); 
+      adjustByAngle(test);
+      _counter -= 1;
     }
   }
   
@@ -182,5 +185,9 @@
     test.show();
     //_testq.show();
     _upNext.show();
+    if(_counter == 0){
+       _bubbleField.Redraw();
+       _counter = 10;
+    }
   }
   
