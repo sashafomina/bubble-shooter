@@ -3,6 +3,9 @@ public class BubbleGrid {
   private int _size; //number of active bubbles
   private LList<Bubble> _cluster;
   private LList<Bubble> _hangingBubbles;
+  public int _score;
+  public int streak;
+  public int Shelper;
   public static final int RADIUS = 20;
   
   //Constructor 
@@ -13,6 +16,9 @@ public class BubbleGrid {
     _bubbleGrid = new Bubble[13][20]; //column number must always be even
     populate();
     setNeighbors();
+    _score = 0;
+    streak = 0;
+    Shelper = 0;
   }
   
   
@@ -21,6 +27,14 @@ public class BubbleGrid {
      return  _bubbleGrid[x][y];
   }
   
+  
+  public void setScore(int s){
+     _score = s; 
+  }
+  
+  public int getScore(){
+     return _score; 
+  }
   
   //Sets a particular spot of the grid as a particular bubble
   public void setBubble(int x, int y, Bubble b){
@@ -58,6 +72,14 @@ public class BubbleGrid {
     }
     else {
       while (_cluster.size() != 0){
+        int a = _cluster.size() - 3;
+        _score += 50;
+        for (int i = 0; i < a; i ++){
+            _score *= 2;
+        }  
+        if (_cluster.size() > streak){
+           streak = _cluster.size(); 
+        }
         Bubble current = _cluster.get(0);
         current.setChecked(false);
         current.setState(-1);
@@ -102,14 +124,19 @@ public class BubbleGrid {
     for (int row = _bubbleGrid.length-1; row >= 0 ; row --){
       for (int c = 0; c< _bubbleGrid[0].length; c ++){
         if(_bubbleGrid[row][c] != null && _bubbleGrid[row][c].getHanging() == 0 && _bubbleGrid[row][c].getState() == 1){
+          _score += 50;
+          Shelper += 1;
           Bubble actual = _bubbleGrid[row][c]; 
           Bubble copy = new Bubble(actual.getXcor() , actual.getYcor(), actual.getColor(), 1 );
           _hangingBubbles.add(copy);
           copy.show();
           actual.setState(0);
-          
         }        
       }
+    }
+    if (Shelper > 0){
+       streak += Shelper;
+       Shelper = 0;
     }
   }
   

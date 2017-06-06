@@ -24,6 +24,7 @@
   boolean modeThree;
   boolean restarting;
   PImage Bubs;
+  PImage endBubs;
   //ALQueue<Bubble> _testq;
   
   static final float SPEED = 12;
@@ -32,6 +33,7 @@
   void setup(){
      size(421, 600);
      Bubs = loadImage ("bubbles.jpg");
+     endBubs = loadImage("endBubbles.jpg");
      _inMotion = false;
      _bubbleField = new BubbleGrid(); 
      _upNext = new ALQueue<Bubble>();
@@ -86,7 +88,7 @@
   }
   
   void gameOverScreen(){
-     background(150);
+     background(endBubs);
      fill(175, 100, 220);
      textAlign(CENTER);
      textSize(35);
@@ -96,6 +98,9 @@
      fill(255);
      textSize(20);
      text("Start Again", 200, 475);
+     fill(255,0,0);
+     text("Your Score is: " + _bubbleField.getScore(), 200, 300);
+     text("Largest Cluster of Bubbles Popped: " + _bubbleField.streak, 200, 340);
   }
   
   void snap(){
