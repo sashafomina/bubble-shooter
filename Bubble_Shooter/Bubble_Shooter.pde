@@ -219,14 +219,17 @@
       update (mouseX, mouseY);
       if (modeOne){
          _counter = 10;
+         modeOne = false;
          startGame();
       }
       else if(modeTwo){
         _counter = 8;
+        modeTwo = false;
         startGame();
       }
       else if(modeThree){
         _counter = 10;
+        modeThree = false;
         startGame();
       }
     }
@@ -241,6 +244,7 @@
     else if (gameScreen == 2){
         update (mouseX, mouseY);
         if (restarting){
+          restarting = false;
           _bubbleField = new BubbleGrid();
           gameScreen = 0;
         }
