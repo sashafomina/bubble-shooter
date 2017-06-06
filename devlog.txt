@@ -118,7 +118,7 @@ Kevin :: Skyped Daniel in the evening to discuss a solution to the problem of fl
 2017-06-05
 --------------------------------------------------------------
 Sasha :: Resolved hanging bubble issue ( bubble not attached to anything that remain). Added a new state variable called _hanging in Bubble and methods findHanging(), markHanging() that identitfy hanging bubbles and set their states to 0. Every bubble starts out with a state of 0 hanging and recursively traversing the active neighbors starting from the top row bubbles, you can identify the hanging bubles becuase they will not be vistied by the traversal, thus, thay can be marked accordingly.
-Daniel ::
+Daniel :: Created the Redraw method in BubbleGrid, which augments the numbers of bubbles in play by one row every ten shots.
 Kevin :: 
 ==============================================================
 
