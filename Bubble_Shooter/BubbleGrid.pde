@@ -148,6 +148,18 @@ public class BubbleGrid {
     }
   }
   
+  public boolean checkGameStatus(){
+    boolean ret = false;
+     for (int c = 0; c < _bubbleGrid[0].length; c ++){
+        if (_bubbleGrid[12][c] != null){
+           if (  _bubbleGrid[12][c].getState() == 1){
+               ret = true;
+           }
+        }
+     }
+     return ret;
+  }
+  
   public void resetHanging(){
     for (int row = 0; row < _bubbleGrid.length ; row ++){
       for (int c = 0; c< _bubbleGrid[0].length; c ++){

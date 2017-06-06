@@ -5,6 +5,7 @@
   BubbleGrid _bubbleField; 
   ALQueue<Bubble> _upNext;
   int _counter;
+  boolean loseYet;
   //ALQueue<Bubble> _testq;
   
   static final float SPEED = 12;
@@ -20,6 +21,7 @@
      test = _upNext.dequeue();
      _upNext.enqueue(new Bubble());
      center = new PVector(test.getXcor(), test.getYcor());
+     loseYet = false;
      noStroke();
   }
   
@@ -28,6 +30,7 @@
       launch(test);
       snap();
       drawAll();
+    
   }
   
   
@@ -178,6 +181,10 @@
     }
   }
   
+  
+  void loseGame(){
+      
+  }
     
   void drawAll(){
     createPointer(test);
@@ -188,6 +195,10 @@
     if(_counter == 0){
        _bubbleField.Redraw();
        _counter = 10;
+    }
+    loseYet = _bubbleField.checkGameStatus();
+    if(loseYet){
+       this.loseGame();
     }
   }
   
