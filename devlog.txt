@@ -114,6 +114,12 @@ Kevin :: Attempted to cut the dotted line short so that it doesn't go past bubbl
 Sasha :: Implemented popping mechanism using recursion and a linked list. When a bubble is snapped into place a linked list cluster is recursively created that contains all its same color neighbors and the same color neighbors of its neighbors and ... ect. To ensure that no bubble is added into the cluster twice, a new boolean instance var of Bubble (_checked) was added. The pop() method is then invoked. If cluster is greater in size than 3, then all its constituents' states are set to -1 and removed from the cluster as their _checked vars are set back to false. Otherwise, they are removed from the cluster their _checked vars is set to false but their states remain 1. UNRESOLVED PROBLEM: there are hanging bubbles, that are not attached to anything once the cluster is popped which remain active.
 Daniel :: Skyped Kevin to consult about the problems with the floating bubbles.
 Kevin :: Skyped Daniel in the evening to discuss a solution to the problem of floating bubbles not popping, i.e. even though a cluster of bubbles of the same colors would pop, it can potential leave other colored bubbles floating. We came up with a solution that uses recursive backtracking to check if a bubble's side and bottom neighbors have any top neighbors. New instance variables were created for the Bubble class, called _checked and _floating, both booleans that aid in the solution. New methods were also created ArrayList<Bubble>s of a certain type of neighbor, like side neighbors and top neighbors, because we found them useful. Code is still not completely debugged, however.
+
+2017-06-05
+--------------------------------------------------------------
+Sasha :: Resolved hanging bubble issue ( bubble not attached to anything that remain). Added a new state variable called _hanging in Bubble and methods findHanging(), markHanging() that identitfy hanging bubbles and set their states to 0. Every bubble starts out with a state of 0 hanging and recursively traversing the active neighbors starting from the top row bubbles, you can identify the hanging bubles becuase they will not be vistied by the traversal, thus, thay can be marked accordingly.
+Daniel ::
+Kevin :: 
 ==============================================================
 
 
