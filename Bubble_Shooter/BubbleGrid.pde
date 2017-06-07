@@ -2,23 +2,26 @@ public class BubbleGrid {
   private Bubble[][] _bubbleGrid;
   private int _size; //number of active bubbles
   private LList<Bubble> _cluster;
+  private int _countNonPop;
   private LList<Bubble> _hangingBubbles;
-  public int _score;
-  public int streak;
-  public int Shelper;
+  private int _numMoved;
+  private int _score;
+  private int _largestCluster;
+  private int _poppedPerCluster;
   public static final int RADIUS = 20;
   
   //Constructor 
   public BubbleGrid(){
+    _largestCluster = 0;
+    _score = 0;
+    _numMoved = 0;
     _cluster = new LList<Bubble>();
     _size = 0; 
+    _countNonPop = 0;
     _hangingBubbles = new LList<Bubble>();
-    _bubbleGrid = new Bubble[13][20]; //column number must always be even
+    _bubbleGrid = new Bubble[12][20]; //column number must always be even
     populate();
     setNeighbors();
-    _score = 0;
-    streak = 0;
-    Shelper = 0;
   }
   
   
@@ -27,19 +30,95 @@ public class BubbleGrid {
      return  _bubbleGrid[x][y];
   }
   
-  
-  public void setScore(int s){
-     _score = s; 
-  }
-  
-  public int getScore(){
-     return _score; 
+  public int getCountNonPop(){
+    return _countNonPop;
   }
   
   //Sets a particular spot of the grid as a particular bubble
   public void setBubble(int x, int y, Bubble b){
      _bubbleGrid[x][y] = b;
   }
+   
+   public void moveDown(){
+     Bubble[][] bubbleGrid2 = new Bubble[_bubbleGrid.length + 1][_bubbleGrid[0].length];
+     for (int row=0; row < _bubbleGrid.length ; row ++){
+       for (int col=0; col < _bubbleGrid[0].length ; col ++){
+         bubbleGrid2[row + 1][col] = _bubbleGrid[row][col];
+       }
+     }
+       for (int c=0; c < _bubbleGrid[0].length ; c++){
+         if (c % 2 == (_numMoved % 2)){
+           bubbleGrid2[0][c] = null;
+         }
+         else {
+           bubbleGrid2[0][c] = new Bubble();
+         }
+       }
+      //println(printArr());
+     _bubbleGrid = bubbleGrid2;
+     //println(printArr());
+     adjustCors();
+     setNeighbors();
+     resetHanging();
+     //println(printArr());
+     _numMoved ++;
+   }
+   
+   public void adjustCors(){
+     for (int row=0; row < _bubbleGrid.length ; row ++){
+       for (int col=0; col < _bubbleGrid[0].length ; col ++){       
+        if (row % 2 == (_numMoved % 2)){
+          if (col == 1){
+            _bubbleGrid[row][col].setXcor(2*RADIUS);
+            _bubbleGrid[row][col].setYcor(2*RADIUS*row + RADIUS);
+            if (row == 0){
+               _bubbleGrid[row][col].setHanging(1);
+             }
+          }
+          else if (col % 2 == 1){
+            _bubbleGrid[row][col].setXcor(2*RADIUS*(col/2) + 2 * RADIUS);
+            _bubbleGrid[row][col].setYcor(2*RADIUS*row + RADIUS);
+            if (row == 0){
+               _bubbleGrid[row][col].setHanging(1);
+             }
+          }
+        }
+        else { 
+         if ( col%2 == 0 && col != 0) {
+           _bubbleGrid[row][col].setXcor(2*RADIUS*(col/2) + RADIUS);
+           _bubbleGrid[row][col].setYcor(2*RADIUS*row +RADIUS);
+           if (row == 0){
+               _bubbleGrid[row][col].setHanging(1);
+             }
+          
+         }
+         else if (col == 0) {
+             _bubbleGrid[row][col].setXcor(RADIUS);
+             _bubbleGrid[row][col].setYcor(2*RADIUS*row +RADIUS);
+             if (row == 0){
+               _bubbleGrid[row][col].setHanging(1);
+             }
+             
+          }
+        }
+      }
+    }
+  }
+
+  
+ 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   //parameter is launched bubble
@@ -63,32 +142,36 @@ public class BubbleGrid {
   }
   
   public void pop(){
+    _poppedPerCluster = 0; 
    //println (_cluster.size());
     if (_cluster.size() < 3){
       while ( _cluster.size() != 0){
         _cluster.get(0).setChecked(false);
         _cluster.remove();
       }
+      _countNonPop =1;
     }
     else {
+      _countNonPop = 0;
+      _poppedPerCluster += _cluster.size();
       while (_cluster.size() != 0){
-        int a = _cluster.size() - 3;
-        _score += 50;
-        for (int i = 0; i < a; i ++){
-            _score *= 2;
-        }  
-        if (_cluster.size() > streak){
-           streak = _cluster.size(); 
-        }
         Bubble current = _cluster.get(0);
         current.setChecked(false);
         current.setState(-1);
+        _score += 5;
         _cluster.remove();
       }
       searchForHanging();
       resetHanging();
+      if (_poppedPerCluster > _largestCluster){
+        _largestCluster = _poppedPerCluster;
+      }
        //println(_borderCluster.size());
     }
+  }
+  
+  public int getLargestCluster(){
+    return _largestCluster;
   }
 
   
@@ -102,11 +185,12 @@ public class BubbleGrid {
   }
   
   public String printArr(){
+    //println("GARGGGG");
     String retStr = "";
     for (int row = 0; row < _bubbleGrid.length ; row ++){
       for (int c = 0; c< _bubbleGrid[0].length; c ++){
         if (_bubbleGrid[row][c] != null){
-          retStr += _bubbleGrid[row][c].getHanging() + "  ";
+          retStr += _bubbleGrid[row][c].getHanging() + " " ;
         }
       }
       retStr += "\n";
@@ -116,7 +200,7 @@ public class BubbleGrid {
   
   public void searchForHanging(){
     for (int col = 0; col < _bubbleGrid[0].length ; col++){
-       if (_bubbleGrid[0][col] != null){
+       if (_bubbleGrid[0][col] != null && _bubbleGrid[0][col].getState() == 1 ){
          markHanging (_bubbleGrid[0][col]);
        }
     }
@@ -124,71 +208,20 @@ public class BubbleGrid {
     for (int row = _bubbleGrid.length-1; row >= 0 ; row --){
       for (int c = 0; c< _bubbleGrid[0].length; c ++){
         if(_bubbleGrid[row][c] != null && _bubbleGrid[row][c].getHanging() == 0 && _bubbleGrid[row][c].getState() == 1){
-          _score += 50;
-          Shelper += 1;
           Bubble actual = _bubbleGrid[row][c]; 
+          _poppedPerCluster += 1;
           Bubble copy = new Bubble(actual.getXcor() , actual.getYcor(), actual.getColor(), 1 );
           _hangingBubbles.add(copy);
           copy.show();
           actual.setState(0);
+          
         }        
       }
     }
-    if (Shelper > 0){
-       streak += Shelper;
-       Shelper = 0;
-    }
-  }
-  
-  public void Redraw(){
-     for (int row = _bubbleGrid.length - 1; row > 0; row --){
-        for (int c = 0; c < _bubbleGrid[0].length; c ++){
-            if (c % 2 == 0){
-               if (_bubbleGrid[row][c] != null){
-                  _bubbleGrid[row][c].setColor(_bubbleGrid[row - 1][c + 1].getColor());
-                  if (_bubbleGrid[row][c].getState() != 1 && _bubbleGrid[row - 1][c + 1].getState() == 1){
-                     _bubbleGrid[row][c].setState(1); 
-                  }
-               }
-            }
-            else{
-               if (_bubbleGrid[row][c] != null){
-                  _bubbleGrid[row][c].setColor(_bubbleGrid[row - 1][c - 1].getColor());
-                  if (_bubbleGrid[row][c].getState() != 1 && _bubbleGrid[row - 1][c - 1].getState() == 1){
-                     _bubbleGrid[row][c].setState(1); 
-                  }
-               }
-            }
-        }
-     }
-     for (int col = 0; col < _bubbleGrid[0].length; col ++){
-       if (col % 2 == 1){
-             _bubbleGrid[0][col] = null;
-       }
-       else if ( col != 0) {
-             _bubbleGrid[0][col] = new Bubble(2*RADIUS*(col/2) + RADIUS , RADIUS , 1);
-            
-       }
-       else {
-             _bubbleGrid[0][col] = new Bubble(RADIUS, RADIUS, 1);
-       }
-    }
-  }
-  
-  public boolean checkGameStatus(){
-    boolean ret = false;
-     for (int c = 0; c < _bubbleGrid[0].length; c ++){
-        if (_bubbleGrid[12][c] != null){
-           if (  _bubbleGrid[12][c].getState() == 1){
-               ret = true;
-           }
-        }
-     }
-     return ret;
   }
   
   public void resetHanging(){
-    for (int row = 0; row < _bubbleGrid.length ; row ++){
+    for (int row = 1; row < _bubbleGrid.length ; row ++){
       for (int c = 0; c< _bubbleGrid[0].length; c ++){
         if (_bubbleGrid[row][c] != null){
           _bubbleGrid[row][c].setHanging(0);
@@ -227,16 +260,24 @@ public class BubbleGrid {
          }
          else if ( col != 0) {
            _bubbleGrid[row][col] = new Bubble(2*RADIUS*(col/2) + RADIUS , 2*RADIUS*row +RADIUS , state);
-          
+           if (row == 0){
+               _bubbleGrid[row][col].setHanging(1);
+             }
          }
          else {
              _bubbleGrid[row][col] = new Bubble(RADIUS, 2*RADIUS*row +RADIUS, state);
+             if (row == 0){
+               _bubbleGrid[row][col].setHanging(1);
+             }
           }
         }
       }
     }
   }//end populate()
      
+     public int getScore(){
+       return _score;
+     }
   
   
 public void setNeighbors(){
@@ -327,6 +368,10 @@ public void setNeighbors(){
   
   public LList<Bubble> getHangingBubbles(){
     return _hangingBubbles;
+  }
+  
+  public void setCountNonPop(int count){
+    _countNonPop = count;
   }
   
 }//end class BubbleGrid 
