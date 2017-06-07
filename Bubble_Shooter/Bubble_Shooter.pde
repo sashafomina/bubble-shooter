@@ -164,7 +164,7 @@
   }
   
   void mouseClicked(){
-    if (_gameScreen == 0){ '//At start screen
+    if (_gameScreen == 0){ //At start screen
       _gameScreen = 1;
     }
     else if (_gameScreen == -1 || _gameScreen == 2){ //At end screen
