@@ -1,22 +1,22 @@
-  Bubble test;
-  boolean _inMotion;
+  Bubble test; //The bubble that is going to be shot
+  boolean _inMotion; //Whether or not the bubble has been released
   PVector mouseClick;
-  PVector center;
-  boolean _lose;
-  boolean _win;
-  BubbleGrid _bubbleField; 
-  ALQueue<Bubble> _upNext;
-  int _turn;
-  int _gameScreen;
-  PImage _initial;
-  PImage _end;
-  PFont _font;
+  PVector center; 
+  boolean _lose; //Whether player has lost the game
+  boolean _win; //Whether player has won the game
+  BubbleGrid _bubbleField;  //The game board
+  ALQueue<Bubble> _upNext; //Queue of upcoming bubbles
+  int _turn; //The turn numner; used to keep track of when to update the game board
+  int _gameScreen; //Whether or not the start screen, end screen, or the actual game is currently in use
+  PImage _initial; //pictures
+  PImage _end; //background images
+  PFont _font; //font
   
-  static final float SPEED = 12;
-  static final int MAXROW = 12;
-  static final int RADIUS = 20; 
+  static final float SPEED = 12; //speed of bubble
+  static final int MAXROW = 12; //Red line that if the bubbles exceed the game will be over
+  static final int RADIUS = 20;  //radius of bubble
 
-  
+  //Setting up the initial game board  
   void setup(){
      size(421, 600);
      _font = createFont("Arial Bold", 18);
@@ -29,7 +29,7 @@
      _win = false;
      _bubbleField = new BubbleGrid(); 
      _upNext = new ALQueue<Bubble>();
-     populateQueue();
+     populateQueue(); //Creates the three bubbles the queue starts with
      test = _upNext.dequeue();
      _upNext.enqueue(new Bubble());
      center = new PVector(test.getXcor(), test.getYcor());
@@ -37,10 +37,10 @@
   }
   
   void draw(){
-    if (_gameScreen == 0){
+    if (_gameScreen == 0){ //Start screen
       initScreen();
     }
-    if (_gameScreen == 1 &&!_lose && !_win){
+    if (_gameScreen == 1 &&!_lose && !_win){ //The actual game
       background(255,255,255);
       launch(test);
       snap();
@@ -49,7 +49,7 @@
       checkWin();
       drawAll();
     }
-    else if (_lose) {
+    else if (_lose) { //The end screen
       delay(1000);
       background(255,255,255);
       gameOverScreen();
@@ -61,6 +61,7 @@
     }
   }
   
+  //Creating the start screen
   void initScreen(){
      background(_initial);
      fill(252, 252, 252);
@@ -70,18 +71,9 @@
      textSize(20);
      text("Click Anywhere to Begin", 200, 100);
      fill(175,175,0);
-     /*
-     rect(x1, y1, w1, h1);
-     rect(x2, y2, w2, h2);
-     rect(x3, y3, w3, h3);
-     textSize(20);
-     fill(175, 100, 220);
-     text("Easy Regular", 200, 125);
-     text("Hard Regular", 200, 250);
-     text("Arcade Mode", 200, 375);
-     */
   }
   
+  //Creating the end screen
   void gameOverScreen(){
      background(_end);
      fill(0, 0, 0);
@@ -104,6 +96,7 @@
      text("Largest Cluster of Bubbles Popped: " + _bubbleField.getLargestCluster(), 200, 340);
   }
   
+  //Restarts the game after game is over
    void restarting(int x, int y, int w, int h){
     if (mouseX >= x && mouseX <= x+w && mouseY >= y && mouseY <= y+h) {
       setup();
@@ -111,7 +104,7 @@
     } 
   }  
   
-  
+  //Snaps the bubble that is travelling into place 
   void snap(){
     if (_inMotion && _bubbleField.stick(test) != null){
       _turn ++;
@@ -119,7 +112,6 @@
       test.setDy(0);
       Bubble correct = _bubbleField.whichNeighbor(test); 
       _inMotion = false;
-      //println(correct.getNeighbors().size());
       _bubbleField.createCluster(correct);
       _bubbleField.pop();
       recharge();
@@ -127,16 +119,19 @@
     }
   }
   
-  void recharge(){
+  //Replacing the bubble that was just launched by another bubble from the queue
+  void recharge(){ 
     test = _upNext.dequeue(); 
     _upNext.enqueue(new Bubble());
   }
+  
   
   void createAngleVector() {
     mouseClick = new PVector(mouseX, mouseY);
     mouseClick.sub(center);
   }
   
+  //Launching the bubb;e
   void launch(Bubble b){
     if (_inMotion){
       b.move();
@@ -174,14 +169,15 @@
     }
   }
   
+  
   void mouseClicked(){
-    if (_gameScreen == 0){
+    if (_gameScreen == 0){ //When clicked while in the start screen, the game begins
       _gameScreen = 1;
     }
-    else if (_gameScreen == -1 || _gameScreen == 2){
+    else if (_gameScreen == -1 || _gameScreen == 2){ //When clicked while in the end game screen, the game restarts
       restarting(125, 425, 150, 80);
     }
-    else if (_gameScreen == 1){
+    else if (_gameScreen == 1){ //When clicked while in game, the bubble is set in motion.
       if (!_inMotion){
         _inMotion = true;  
         createAngleVector();
@@ -190,39 +186,7 @@
     }
   }
   
-  /*
-  void createPointer(Bubble b){
-    if (!_inMotion){ 
-      float xChange = mouseX - center.x;
-      float yChange = mouseY - center.y;
-      float angle;
-      if (xChange == 0) {
-        angle = (-1 *PI)/2;
-      }
-      else {
-        angle = atan(yChange/xChange);
-        //println(mouseX);
-        if (mouseX < b.getXcor()){
-            angle = PI + angle;
-         }
-        if (angle < PI && angle > PI/2){
-          angle = PI;
-        }
-        else if (angle > 0 && angle < PI/2 ){
-          angle = 0;
-        }
-      }
-      //println(angle);
-      float newX = center.x + cos(angle) * 175;
-      float newY = center.y + sin(angle) * 175;
-      stroke(0);
-      strokeWeight(2);
-      line(center.x, center.y, newX, newY);
-      noStroke();
-    }
-  }
-  */
-  
+  //Creates a dotted line to help the player aim the bubble
   void createPointer(Bubble b) {
    if (!_inMotion) { 
      float xChange = mouseX - test._xcor;
@@ -233,7 +197,6 @@
      } 
      else {
        angle = atan(yChange/xChange);
-       //println(mouseX);
        if (mouseX < b.getXcor()) {
          angle = PI + angle;
         }
@@ -262,16 +225,14 @@
   }
   
   
-  void populateQueue(){
+  void populateQueue(){ //Creates a new queue of bubbles
     for (int x = 0 ; x < 3 ; x++){
       _upNext.enqueue(new Bubble());
     }
   }
   
-  void shiftDown(){
-    //println(_turn);
+  void shiftDown(){ //Depending on how many turns have elapsed, the bubble grid will shift down one.
     if(_turn % 5 == 0 && _bubbleField.getCountNonPop() != 0){
-      println("ITS HERE: " + _turn);
       _turn ++;
       _bubbleField.setCountNonPop(0);
       _bubbleField.moveDown();
@@ -279,7 +240,8 @@
     
   }
   
-  void checkLose(){
+  //If in the bubble grid, bubbles have exceeded one less than the maximum row, then the player has lost.
+  void checkLose(){ 
      for (int col = 0 ; col < _bubbleField.getBubbleGrid()[0].length ; col++){
        if (_bubbleField.getBubbleGrid()[MAXROW-1][col] != null && _bubbleField.getBubbleGrid()[MAXROW-1][col].getState() == 1){
          _lose=true;
@@ -290,6 +252,7 @@
      _lose = false;
   }
   
+  //If there are no active bubbles in the bubble field, then the player has won.
   void checkWin(){
     for (int col = 0; col < _bubbleField.getBubbleGrid()[0].length; col++){
       if (_bubbleField.getBubbleGrid()[0][col] != null && _bubbleField.getBubbleGrid()[0][col].getState() == 1){
@@ -300,10 +263,7 @@
     _gameScreen = 2;
   }
   
-  //void winPage()
-  //void losePage()
-  
-  void loseLine(){
+  void loseLine(){ //Visually displays the red line for losing the game
     stroke(255, 0 ,0 ); 
     line(0 , 2*RADIUS*MAXROW- RADIUS, width, 2*RADIUS*MAXROW - RADIUS);
     noStroke();
@@ -314,7 +274,6 @@
     createPointer(test);
     _bubbleField.show();
     test.show();
-    //_testq.show();
     _upNext.show();
   }
   
