@@ -226,7 +226,7 @@
   
   void shiftDown(){ //Creating a new row of bubbles at the top and moving everything down
     if(_turn % 5 == 0 && _bubbleField.getRecentPop() != 0){
-      println("ITS HERE: " + _turn);
+      //println("ITS HERE: " + _turn);
       _turn ++;
       _bubbleField.setRecentPop(0);
       _bubbleField.moveDown();
