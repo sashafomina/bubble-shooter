@@ -12,7 +12,7 @@ Bubble Shooter!
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
+- Hanging bubbles issue
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -20,11 +20,11 @@ UNRESOLVED ISSUES
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
+-Hex grid structure 
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
+-No undo button 
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,10 +121,16 @@ Sasha :: Resolved hanging bubble issue ( bubble not attached to anything that re
 Daniel :: Created the Redraw method in BubbleGrid, which augments the numbers of bubbles in play by one row every ten shots. Also created the checkGameStatus method in BubbleGrid to check if the bubbles has exceeded a certain threshold, and therefore the game should end. UNRESOLVED ISSUE: what it will look like after the game indeed ends.
 Kevin :: 
 
-2017-06-05
+2017-06-06
 --------------------------------------------------------------
-Sasha ::
+Sasha :: Add method that adds  a top row every 5 turns, given the last turn was not a successful pop. This involves shifting all the existing bubbles one row down and adding an instance vor _numMoved to keep track of how many rows have been added throughout the game since the top row alternates Bubble,null, Bubble , null ... (as do all even rows) and odd rows start with null and alternate. Therefore, when shifting bubbles down I have to adjust their xcor dinates accordingly. Also, Fixed bug where top row Bubbles are considered hanging  by adding resetHanging method and making sure all top row elements are initially marked as not hanging during setup. 
 Daniel :: Updated Bubble_Shooter to implement a start screen and a way for the game to restart. Also created a system to keep track of player's score and largest cluster of bubbles popped. 
+Kevin :: 
+
+2017-06-07
+--------------------------------------------------------------
+Sasha ::  Added methods that check if lost or won, and integrated Daniel's method's into the shared code base
+Daniel :: Added start screen, end screen , start over button, and end screen stats
 Kevin :: 
 ==============================================================
 
