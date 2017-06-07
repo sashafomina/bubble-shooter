@@ -270,10 +270,10 @@
   
   void shiftDown(){
     //println(_turn);
-    if(_turn % 5 == 0 && _bubbleField.getCountNonPop() != 0){
+    if(_turn % 5 == 0 && _bubbleField.getRecentPop() != 0){
       println("ITS HERE: " + _turn);
       _turn ++;
-      _bubbleField.setCountNonPop(0);
+      _bubbleField.setRecentPop(0);
       _bubbleField.moveDown();
     }
     
