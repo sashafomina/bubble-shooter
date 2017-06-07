@@ -2,13 +2,13 @@ public class BubbleGrid {
   private Bubble[][] _bubbleGrid;
   private int _size; //number of active bubbles
   private LList<Bubble> _cluster;
-  private int _countNonPop;
+  private int _cPop;
   private LList<Bubble> _hangingBubbles;
   private int _numMoved;
   private int _score;
   private int _largestCluster;
   private int _poppedPerCluster;
-  public static final int RADIUS = 20;
+  public static final int RADIUS = 20recent
   
   //Constructor 
   public BubbleGrid(){
@@ -17,7 +17,7 @@ public class BubbleGrid {
     _numMoved = 0;
     _cluster = new LList<Bubble>();
     _size = 0; 
-    _countNonPop = 0;
+    _recentPop = 0;
     _hangingBubbles = new LList<Bubble>();
     _bubbleGrid = new Bubble[12][20]; //column number must always be even
     populate();
@@ -30,8 +30,8 @@ public class BubbleGrid {
      return  _bubbleGrid[x][y];
   }
   
-  public int getCountNonPop(){
-    return _countNonPop;
+  public int getRecentPop(){
+    return _recentPop;
   }
   
   //Sets a particular spot of the grid as a particular bubble
@@ -149,10 +149,10 @@ public class BubbleGrid {
         _cluster.get(0).setChecked(false);
         _cluster.remove();
       }
-      _countNonPop =1;
+      _recentPop =1;
     }
     else {
-      _countNonPop = 0;
+      _recentPop = 0;
       _poppedPerCluster += _cluster.size();
       while (_cluster.size() != 0){
         Bubble current = _cluster.get(0);
@@ -371,7 +371,7 @@ public void setNeighbors(){
   }
   
   public void setCountNonPop(int count){
-    _countNonPop = count;
+    _recentPop = count;
   }
   
 }//end class BubbleGrid 
