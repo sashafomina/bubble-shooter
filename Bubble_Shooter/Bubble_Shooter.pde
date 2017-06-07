@@ -232,7 +232,7 @@
   }
   
   void shiftDown(){ //Depending on how many turns have elapsed, the bubble grid will shift down one.
-    if(_turn % 5 == 0 && _bubbleField.getCountNonPop() != 0){
+    if(_turn % 5 == 0 && _bubbleField.getRecentPop() != 0){
       _turn ++;
       _bubbleField.setCountNonPop(0);
       _bubbleField.moveDown();

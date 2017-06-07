@@ -8,7 +8,8 @@ public class BubbleGrid {
   private int _score;
   private int _largestCluster;
   private int _poppedPerCluster;
-  public static final int RADIUS = 20recent
+  private int _recentPop;
+  public static final int RADIUS = 20;
   
   //Constructor 
   public BubbleGrid(){
