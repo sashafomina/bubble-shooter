@@ -181,10 +181,12 @@
     if (_gameScreen == -1 || _gameScreen == 2){
       restarting(125, 425, 150, 80);
     }
-    else if (!_inMotion){
-      _inMotion = true;  
-      createAngleVector();
-      adjustByAngle(test); 
+    else if (_gameScreen == 1){
+      else if (!_inMotion){
+        _inMotion = true;  
+        createAngleVector();
+        adjustByAngle(test); 
+      }
     }
   }
   
