@@ -6,29 +6,36 @@ pd 4
 ---------------------
 Bubble Shooter!
 
-
-
 /////////// Zone of Reflection \\\\\\\\\\\
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Hanging bubbles issue
+1. Dotted Line: although it seemed pretty easy, we had a bit of trouble figuring out how to draw the dotted line, because building small line segments whose angle was constantly changing required a lot of math and keys to success.
+2. Hanging bubbles issue: it was easy enough to clear bubbles if more than 3 of the same colors were touching, but being able to then determine which bubbles were no longer hanging on and needed to be popped was quite difficult, and it required a lot of discussion. Daniel and Kevin had spent a lot of time talking through an algorithm that we attempted but could not debug, but then Sasha took a different approach and it worked out. It taught us that the time spent on a problem doesn't necessarily correlate to the success in solving it, and having a group member be able to step back and say "what if we tried this other very different approach" is very valuable.
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
+1. Fix the bug with the updating of rows of bubbles: there are rare occasions where the bubbles do not pop correctly, and it needs to be further analyzed and tested to be able to debug. Since trying to repeat the bug in itself took a lot of time due to how rare it was, we fel that it wasn't absolutely urgent in order to present a playable and complex game.
+2. The undo button: we originally planned to create this using the stack data structure, but it was something we pushed off and never had the chance to pursue.
+3. Make pop appear as if the bubbles fall down: a simple animation that could make our game look cooler.
+4. Different difficulty settings: There are ways we could've easily varied complexity, such as increasing the number of colors, pushing the rows of bubbles down at a faster rate, and making the game board bigger.
+5. Dotted Line: the dotted line extends to the end of the board, but we wanted it to end at the point where it reached a bubble, but we didn't pursue this simply because we tried it, and felt that the time spent working on it was not work what it might have contributed to our game.
+6. When a bubble is aimed and hits the ceiling directly, it bounces off walls until it sticks to a bubble.
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--Hex grid structure 
+1. Hex grid structure: it was a big point of discussion at the beginning of the project, because we were not sure exactly the best way to implement it, given its complexity. It was interesting throughout the project in figuring out how to use it, the relationship between different grids, and how we could build relationships between them.
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--No undo button 
+1. No undo button: we didn't have the time to, and we felt like we were using enough semester two concepts that it wasn't extremely necessary to include.
+We were very happy that we ended up doing most of what we wanted to and paced ourselves well, it felt like a complete project because we were able to incorporate many of the features of bubble shooter, and it felt like a fun game to play!
 
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
--
+1. Keys to Success continue to save lives: since so much of processing is visual, understanding things like popping clusters, the dotted line, or even just the hex grid in general were all easier to code when we drew things out.
+2. Start slow: We had a slow start to the project, and didn't really begin doing serious coding at least 10 days into the project, but it was better that way, because we knew exactly how we were going to approach many big problems we were anticipating, and we felt confident that our time coding could be spent efficiently. In the long run, it saved us a lot of time.
+3. Team Dynamic: we worked well together, and it was obvious that when we worked at the same time and simultaneously talked through the problems, we coded faster and could do better things, because all 3 of us had a variety of approaches to everything and talked through the pros and cons of them, versus on some days, when the other two members were busy, we could only do so little before getting stuck and wanting to consult our teammates.
 
 ||||||||||||||||||||||||||||||||||||||||||
 
@@ -99,7 +106,7 @@ Kevin :: Fixed the dotted line, such that it has a limit of PI/12 out from the l
 
 2017-06-01
 --------------------------------------------------------------
-Sasha :: Transfered inContact method to the Bubble class. Added stick() and whichNeighbor() to the BubbleGird class, reworked Daniel's methods to use a different strategy in which the launched Bubble finds the first grid bubble it collides with and then searchs through its available neighbors to see which available slot is closest to the position of the bubble. Once the closest neighbor is found, the launched bubble's velocity is set to 0 and the launched bubble is set to a new random one to be launched. The closest neighbor is activated (state == 1) and its color is set to the color of the just launched bubble to create the illusion that the launched bubble was snapped in place.  
+Sasha :: Transfered inContact method to the Bubble class. Added stick() and whichNeighbor() to the BubbleGird class, reworked Daniel's methods to use a different strategy in which the launched Bubble finds the first grid bubble it collides with and then searchs through its available neighbors to see which available slot is closest to the position of the bubble. Once the closest neighbor is found, the launched bubble's velocity is set to 0 and the launched bubble is set to a new random one to be launched. The closest neighbor is activated (state == 1) and its color is set to the color of the just launched bubble to create the illusion that the launched bubble was snapped in place. 
 Daniel :: Created an updated plan. Editted BubbleShooter to implement a queue of all upcoming bubbles.
 Kevin :: Revised READme gameplay instructions based on examples from other groups.
 
@@ -119,28 +126,21 @@ Kevin :: Skyped Daniel in the evening to discuss a solution to the problem of fl
 --------------------------------------------------------------
 Sasha :: Resolved hanging bubble issue ( bubble not attached to anything that remain). Added a new state variable called _hanging in Bubble and methods findHanging(), markHanging() that identitfy hanging bubbles and set their states to 0. Every bubble starts out with a state of 0 hanging and recursively traversing the active neighbors starting from the top row bubbles, you can identify the hanging bubles becuase they will not be vistied by the traversal, thus, thay can be marked accordingly.
 Daniel :: Created the Redraw method in BubbleGrid, which augments the numbers of bubbles in play by one row every ten shots. Also created the checkGameStatus method in BubbleGrid to check if the bubbles has exceeded a certain threshold, and therefore the game should end. UNRESOLVED ISSUE: what it will look like after the game indeed ends.
-Kevin :: 
 
 2017-06-06
 --------------------------------------------------------------
 Sasha :: Add method that adds  a top row every 5 turns, given the last turn was not a successful pop. This involves shifting all the existing bubbles one row down and adding an instance vor _numMoved to keep track of how many rows have been added throughout the game since the top row alternates Bubble,null, Bubble , null ... (as do all even rows) and odd rows start with null and alternate. Therefore, when shifting bubbles down I have to adjust their xcor dinates accordingly. Also, Fixed bug where top row Bubbles are considered hanging  by adding resetHanging method and making sure all top row elements are initially marked as not hanging during setup. 
 Daniel :: Updated Bubble_Shooter to implement a start screen and a way for the game to restart. Also created a system to keep track of player's score and largest cluster of bubbles popped. 
-Kevin :: 
+Kevin :: Worked with Sasha on fixing the hanging bubbles bug, when the top row of bubbles wouldn't pop.
 
 2017-06-07
 --------------------------------------------------------------
 Sasha ::  Added methods that check if lost or won, and integrated Daniel's method's into the shared code base
 Daniel :: Added start screen, end screen , start over button, and end screen stats
-Kevin :: 
+Kevin :: Created a name and bubbleShooter text on game board, worked on visual aspects of the start and restart screens, wrote devlog, typed up/updated uml.
 ==============================================================
 
 
-Things we still need to do:
-1. Fix the bug with the updating of rows of bubbles
-2. Create a cover page that player returns to when they lose.
-3. Create a scoring system, and display it after game ends.
-4. The undo button
-5. Make pop appear as if the bubbles fall down
-6. Different difficulty settings???
+
 
 
