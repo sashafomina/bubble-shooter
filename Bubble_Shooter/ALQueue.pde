@@ -1,4 +1,5 @@
 /*****************************************************
+ * Mr. Brown Mykolyk's code from the library
  * class ALQueue
  * uses an ArrayList to implement abstract data type QUEUE
  * (a collection with FIFO property)

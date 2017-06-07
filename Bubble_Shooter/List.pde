@@ -1,4 +1,5 @@
 /*****************************************************
+ * Mr. Brown Mykolyk's code from the library
  * interface List -- subset of actual Java List interface
  * Specifies actions a List must be able to perform.
  * If present in local dir, will take precedence over Java's 

@@ -1,4 +1,5 @@
 /*****************************************************
+ * Mr. Brown Mykolyk's code from the library
  * class LLNode
  * Implements a node, for use in lists and other container classes.
  *****************************************************/

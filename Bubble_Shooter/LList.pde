@@ -1,4 +1,5 @@
 /*****************************************************
+ * Mr. Brown Mykolyk's code from the library
  * class LList
  * skeleton
  * Implements a linked list of LLNodes.
