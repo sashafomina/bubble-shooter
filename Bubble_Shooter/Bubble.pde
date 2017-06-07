@@ -229,16 +229,15 @@ public class Bubble {
       if (_state == 1){
         if (_color == BLUE){
           fill(10,27,216);
-        
         }
         else if (_color == RED){
-          fill (216, 10,10);
+          fill (255, 64, 17);
         }
         else if (_color == YELLOW){
-          fill(229,255,2);
+          fill(255, 239, 17);
         }
         else if (_color == GREEN){
-          fill(25, 244, 9);
+          fill(4, 226, 74);
         }
         else if (_color == PINK){
           fill(255, 0 ,250);
@@ -250,17 +249,17 @@ public class Bubble {
     public void show(){
       if (_state == 1){
         if (_color == BLUE){
-          fill(10,27,216);
+          fill(5, 87, 193);
         
         }
         else if (_color == RED){
-          fill (216, 10,10);
+          fill (255, 64, 17);
         }
         else if (_color == YELLOW){
-          fill(229,255,2);
+          fill(255, 239, 17);
         }
         else if (_color == GREEN){
-          fill(25, 244, 9);
+          fill(4, 226, 74);
         }
         else if (_color == PINK){
           fill(255, 0 ,250);
