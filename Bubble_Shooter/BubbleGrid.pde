@@ -204,7 +204,7 @@ public class BubbleGrid {
          markHanging (_bubbleGrid[0][col]);
        }
     }
-    //println(printArr());
+    println(printArr());
     for (int row = _bubbleGrid.length-1; row >= 0 ; row --){
       for (int c = 0; c< _bubbleGrid[0].length; c ++){
         if(_bubbleGrid[row][c] != null && _bubbleGrid[row][c].getHanging() == 0 && _bubbleGrid[row][c].getState() == 1){
